@@ -1,6 +1,6 @@
 
-# TIN: Transferable-Interactiveness-Knowledge-for-Human-Object-Interaction-Detection
-Codes and Models for Transferable Interactiveness Knowledge for Human-Object Interaction Detection. (CVPR 2019). Notice that this repository is still under construction and subject to change.
+# TIN: Transferable Interactiveness Network (Under Construction)
+Code for our **CVPR2019** paper *Transferable Interactiveness Knowledge for Human-Object Interaction Detection*.
 
 Link: [[Paper]](https://arxiv.org/abs/1811.08264)  [Website]
 
