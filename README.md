@@ -21,23 +21,26 @@ If you find our works useful in your research, please consider citing:
 ![Overview of Our Framework](https://github.com/DirtyHarryLYL/Transferable-Interactiveness-Network/blob/master/images/overview.jpg?raw=true)
 
 ## Results on HICO-DET and V-COCO dataset
+
 **Our Best Results on HICO-DET dataset**
-Method| Full(def) | Rare(def) | None-Rare(def)| Full(ko) | Rare(ko) | None-Rare(ko) | 
+
+|Method| Full(def) | Rare(def) | None-Rare(def)| Full(ko) | Rare(ko) | None-Rare(ko) | 
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|   
-RC<sub>D</sub>| 13.75 | 10.23 | 15.45 | 15.34| 10.98|17.02
-RP<sub>D</sub>C<sub>D</sub>| **17.03** | **13.42**| **18.11**| **19.17**| **15.51**|**20.26**
-RC<sub>T</sub>| 10.61  | 7.78 | 11.45 | 12.47 | 8.87|13.54
-RP<sub>T1</sub>C<sub>D</sub>| 16.91   | 13.32 | 17.99 | 19.05 | 15.22|20.19
-RP<sub>T2</sub>C<sub>D</sub>| **17.55**   | **13.81** | **18.67** | **19.79** | **15.71**|**21.01**
+|RC<sub>D</sub>| 13.75 | 10.23 | 15.45 | 15.34| 10.98|17.02|
+|RP<sub>D</sub>C<sub>D</sub>| **17.03** | **13.42**| **18.11**| **19.17**| **15.51**|**20.26**|
+|RC<sub>T</sub>| 10.61  | 7.78 | 11.45 | 12.47 | 8.87|13.54|
+|RP<sub>T1</sub>C<sub>D</sub>| 16.91   | 13.32 | 17.99 | 19.05 | 15.22|20.19|
+|RP<sub>T2</sub>C<sub>D</sub>| **17.55**   | **13.81** | **18.67** | **19.79** | **15.71**|**21.01**|
 
 **Our Best Results on V-COCO dataset**
-Method| Full(def) | 
+
+|Method| Full(def) | 
 |:---:|:---:|
-RC<sub>D</sub>| 43.2| 
-RP<sub>D</sub>C<sub>D</sub>| **47.8** |
-RC<sub>T</sub>| 38.5 | 
-RP<sub>T1</sub>C<sub>D</sub>| 48.3  | 
-RP<sub>T2</sub>C<sub>D</sub>| **48.7**   |
+|RC<sub>D</sub>| 43.2| 
+|RP<sub>D</sub>C<sub>D</sub>| **47.8** |
+|RC<sub>T</sub>| 38.5 | 
+|RP<sub>T1</sub>C<sub>D</sub>| 48.3  | 
+|RP<sub>T2</sub>C<sub>D</sub>| **48.7**   |
 
 ## Getting Started
 
