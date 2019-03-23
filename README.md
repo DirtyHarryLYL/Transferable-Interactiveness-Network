@@ -22,7 +22,7 @@ If you find our works useful in your research, please consider citing:
 
 ## Results on HICO-DET and V-COCO dataset
 
-**Our Best Results on HICO-DET dataset**
+**Our Results on HICO-DET dataset**
 
 |Method| Full(def) | Rare(def) | None-Rare(def)| Full(ko) | Rare(ko) | None-Rare(ko) | 
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|   
@@ -30,9 +30,10 @@ If you find our works useful in your research, please consider citing:
 |RP<sub>D</sub>C<sub>D</sub>| **17.03** | **13.42**| **18.11**| **19.17**| **15.51**|**20.26**|
 |RC<sub>T</sub>| 10.61  | 7.78 | 11.45 | 12.47 | 8.87|13.54|
 |RP<sub>T1</sub>C<sub>D</sub>| 16.91   | 13.32 | 17.99 | 19.05 | 15.22|20.19|
-|RP<sub>T2</sub>C<sub>D</sub>| **17.55**   | **13.81** | **18.67** | **19.79** | **15.71**|**21.01**|
+|RP<sub>T2</sub>C<sub>D</sub>| 17.22   | 13.51 | 18.32 | 19.38 | 15.38|20.57|
+|RP<sub>T2</sub>C<sub>D</sub>(optimized)| **17.55**   | **13.81** | **18.67** | **19.79** | **15.71**|**21.01**|
 
-**Our Best Results on V-COCO dataset**
+**Our Results on V-COCO dataset**
 
 |Method| Full(def) | 
 |:---:|:---:|
