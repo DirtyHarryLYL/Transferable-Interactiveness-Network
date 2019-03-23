@@ -1,6 +1,6 @@
 
 # Transferable-Interactiveness-Knowledge-for-Human-Object-Interaction-Detection
-Codes and Models for Transferable Interactiveness Knowledge for Human-Object Interaction Detection. (CVPR 2019 Poster). Notice that this repository is still under construction and subject to change.
+Codes and Models for Transferable Interactiveness Knowledge for Human-Object Interaction Detection. (CVPR 2019). Notice that this repository is still under construction and subject to change.
 
 Link: [[Paper]](https://arxiv.org/abs/1811.08264)  [Website]
 
