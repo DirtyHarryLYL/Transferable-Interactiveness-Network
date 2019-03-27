@@ -4,7 +4,7 @@ Code for our **CVPR2019** paper *Transferable Interactiveness Knowledge for Huma
 
 Link: [[Arxiv]](https://arxiv.org/abs/1811.08264)  [Website]
 
-(This repo is still under construction, we would update all the source code and model at June.)
+(This repo is still under construction, we would update all the source code and model at this summer.)
 
 ## Citation
 If you find our works useful in your research, please consider citing:
