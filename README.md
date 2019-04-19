@@ -7,7 +7,7 @@ Link: [[Arxiv]](https://arxiv.org/abs/1811.08264)  [Website]
 (This repo is still under construction, we would update the code and model this summer.)
 
 ## Citation
-If you find our works useful in your research, please consider citing:
+If you find our work useful in your research, please consider citing:
 ```
  @article{li2018transferable,
  title={Transferable Interactiveness Prior for Human-Object Interaction Detection},
