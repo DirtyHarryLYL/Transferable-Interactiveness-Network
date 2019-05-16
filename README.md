@@ -1,6 +1,6 @@
 
 # TIN: Transferable Interactiveness Network             
-Code for our **CVPR2019** paper *Transferable Interactiveness Knowledge for Human-Object Interaction Detection*.
+Code for our **CVPR2019** paper *"Transferable Interactiveness Knowledge for Human-Object Interaction Detection"*.
 
 Created by [Yong-Lu Li](https://dirtyharrylyl.github.io/), Siyuan Zhou, Xijie Huang, Liang Xu, Ze Ma, Hao-Shu Fang, Yan-Feng Wang, [Cewu Lu](http://mvig.sjtu.edu.cn).
 
