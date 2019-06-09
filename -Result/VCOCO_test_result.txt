@@ -1,0 +1,100 @@
+loading annotations into memory...
+Done (t=2.13s)
+creating index...
+index created!
+loading vcoco annotations...
+Human thres = 0.6, Object thres = 0.4, iter = 6000, path =
+loading annotations into memory...
+Done (t=3.49s)
+creating index...
+index created!
+loading vcoco annotations...
+---------Reporting Agent AP (%)------------------
+                hold: AP = 75.54 (#pos = 3608)
+               stand: AP = 87.06 (#pos = 4118)
+                 sit: AP = 70.49 (#pos = 1916)
+                ride: AP = 82.82 (#pos = 556)
+                walk: AP = 54.92 (#pos = 597)
+                look: AP = 65.98 (#pos = 3347)
+                 hit: AP = 87.41 (#pos = 349)
+                 eat: AP = 77.93 (#pos = 521)
+                jump: AP = 59.43 (#pos = 635)
+                 lay: AP = 35.90 (#pos = 387)
+       talk_on_phone: AP = 74.93 (#pos = 285)
+               carry: AP = 67.96 (#pos = 472)
+               throw: AP = 49.97 (#pos = 244)
+               catch: AP = 58.83 (#pos = 246)
+                 cut: AP = 72.15 (#pos = 269)
+                 run: AP = 72.85 (#pos = 687)
+    work_on_computer: AP = 78.91 (#pos = 410)
+                 ski: AP = 83.69 (#pos = 424)
+                surf: AP = 92.74 (#pos = 486)
+          skateboard: AP = 94.35 (#pos = 417)
+               smile: AP = 59.47 (#pos = 1415)
+               drink: AP = 41.20 (#pos = 82)
+                kick: AP = 78.52 (#pos = 180)
+               point: AP = 0.69 (#pos = 31)
+                read: AP = 47.89 (#pos = 111)
+           snowboard: AP = 85.43 (#pos = 277)
+Average Agent AP = 67.58
+---------------------------------------------
+---------Reporting Role AP (%)------------------
+               hold-obj: AP = 37.33 (#pos = 3608)
+              sit-instr: AP = 31.62 (#pos = 1916)
+             ride-instr: AP = 66.28 (#pos = 556)
+               look-obj: AP = 32.25 (#pos = 3347)
+              hit-instr: AP = 74.40 (#pos = 349)
+                hit-obj: AP = 52.59 (#pos = 349)
+                eat-obj: AP = 39.14 (#pos = 521)
+              eat-instr: AP = 9.40 (#pos = 521)
+             jump-instr: AP = 53.83 (#pos = 635)
+              lay-instr: AP = 29.57 (#pos = 387)
+    talk_on_phone-instr: AP = 53.59 (#pos = 285)
+              carry-obj: AP = 40.82 (#pos = 472)
+              throw-obj: AP = 43.27 (#pos = 244)
+              catch-obj: AP = 48.38 (#pos = 246)
+              cut-instr: AP = 41.63 (#pos = 269)
+                cut-obj: AP = 40.14 (#pos = 269)
+ work_on_computer-instr: AP = 65.51 (#pos = 410)
+              ski-instr: AP = 49.95 (#pos = 424)
+             surf-instr: AP = 79.70 (#pos = 486)
+       skateboard-instr: AP = 83.39 (#pos = 417)
+            drink-instr: AP = 34.36 (#pos = 82)
+               kick-obj: AP = 66.26 (#pos = 180)
+            point-instr: AP = 0.22 (#pos = 31)
+               read-obj: AP = 29.94 (#pos = 111)
+        snowboard-instr: AP = 71.59 (#pos = 277)
+Average Role [scenario_1] AP = 47.01
+---------------------------------------------
+Average Role [scenario_1] AP = 48.96, omitting the action "point"
+---------------------------------------------
+---------Reporting Role AP (%)------------------
+               hold-obj: AP = 47.74 (#pos = 3608)
+              sit-instr: AP = 42.54 (#pos = 1916)
+             ride-instr: AP = 68.75 (#pos = 556)
+               look-obj: AP = 38.36 (#pos = 3347)
+              hit-instr: AP = 79.15 (#pos = 349)
+                hit-obj: AP = 59.10 (#pos = 349)
+                eat-obj: AP = 53.12 (#pos = 521)
+              eat-instr: AP = 16.04 (#pos = 521)
+             jump-instr: AP = 54.72 (#pos = 635)
+              lay-instr: AP = 31.54 (#pos = 387)
+    talk_on_phone-instr: AP = 57.22 (#pos = 285)
+              carry-obj: AP = 43.36 (#pos = 472)
+              throw-obj: AP = 46.65 (#pos = 244)
+              catch-obj: AP = 58.13 (#pos = 246)
+              cut-instr: AP = 45.23 (#pos = 269)
+                cut-obj: AP = 44.06 (#pos = 269)
+ work_on_computer-instr: AP = 69.79 (#pos = 410)
+              ski-instr: AP = 60.80 (#pos = 424)
+             surf-instr: AP = 82.82 (#pos = 486)
+       skateboard-instr: AP = 85.85 (#pos = 417)
+            drink-instr: AP = 37.07 (#pos = 82)
+               kick-obj: AP = 77.73 (#pos = 180)
+            point-instr: AP = 0.51 (#pos = 31)
+               read-obj: AP = 38.24 (#pos = 111)
+        snowboard-instr: AP = 75.87 (#pos = 277)
+Average Role [scenario_2] AP = 52.58
+---------------------------------------------
+Average Role [scenario_2] AP = 54.74, omitting the action "point"
+---------------------------------------------
