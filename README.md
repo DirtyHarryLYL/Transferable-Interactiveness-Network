@@ -2,11 +2,9 @@
 # TIN: Transferable Interactiveness Network             
 Code for our **CVPR2019** paper *"Transferable Interactiveness Knowledge for Human-Object Interaction Detection"*.
 
-Created by [Yong-Lu Li](https://dirtyharrylyl.github.io/), Siyuan Zhou, Xijie Huang, Liang Xu, Ze Ma, Hao-Shu Fang, Yan-Feng Wang, [Cewu Lu](http://mvig.sjtu.edu.cn).
+Created by [Yong-Lu Li](https://dirtyharrylyl.github.io/), Siyuan Zhou, [Xijie Huang](https://huangowen.github.io/), [Liang Xu](https://liangxuy.github.io/), Ze Ma, [Hao-Shu Fang](https://fang-haoshu.github.io/), Yan-Feng Wang, [Cewu Lu](http://mvig.sjtu.edu.cn).
 
-Link: [[Arxiv]](https://arxiv.org/abs/1811.08264)  [Website]
-
-(This repo is still under construction, we would update the code and model this summer.)
+Link: [[Arxiv]](https://arxiv.org/abs/1811.08264)  [Website] [Poster]
 
 ## Citation
 If you find our work useful in your research, please consider citing:
@@ -28,29 +26,91 @@ Interactiveness Knowledge indicates whether human and object interact with each 
 
 **Our Results on HICO-DET dataset**
 
-|Method| Full(def) | Rare(def) | None-Rare(def)| Full(ko) | Rare(ko) | None-Rare(ko) | 
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|   
+|Method| Full(def) | Rare(def) | None-Rare(def)| Full(ko) | Rare(ko) | None-Rare(ko) |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 |RC<sub>D</sub>| 13.75 | 10.23 | 15.45 | 15.34| 10.98|17.02|
 |RP<sub>D</sub>C<sub>D</sub>| **17.03** | **13.42**| **18.11**| **19.17**| **15.51**|**20.26**|
 |RC<sub>T</sub>| 10.61  | 7.78 | 11.45 | 12.47 | 8.87|13.54|
 |RP<sub>T1</sub>C<sub>D</sub>| 16.91   | 13.32 | 17.99 | 19.05 | 15.22|20.19|
 |RP<sub>T2</sub>C<sub>D</sub>| 17.22   | 13.51 | 18.32 | 19.38 | 15.38|20.57|
-|RP<sub>T2</sub>C<sub>D</sub>(optimized)| **17.55**   | **13.81** | **18.67** | **19.79** | **15.71**|**21.01**|
+|RP<sub>T2</sub>C<sub>D</sub>(optimized)| **17.54*  | **13.80** | **18.65** | **19.75** | **15.70** |**20.96**|
 
 **Our Results on V-COCO dataset**
 
-|Method| Full(def) | 
+|Method| Full(def) |
 |:---:|:---:|
-|RC<sub>D</sub>| 43.2| 
+|RC<sub>D</sub>| 43.2|
 |RP<sub>D</sub>C<sub>D</sub>| **47.8** |
-|RC<sub>T</sub>| 38.5 | 
-|RP<sub>T1</sub>C<sub>D</sub>| 48.3  | 
-|RP<sub>T2</sub>C<sub>D</sub>| **48.7**   |
+|RC<sub>T</sub>| 38.5 |
+|RP<sub>T1</sub>C<sub>D</sub>| 48.3  |
+|RP<sub>T2</sub>C<sub>D</sub>| **49.0** |
+
+Please note that the results here is different from our paper [[Arxiv]](https://arxiv.org/abs/1811.08264) . It is because **we have improved our codes and method**. The implementation is slightly different from our paper.
 
 ## Getting Started
 
-### Prerequisites
+### Installation
+
+1.Clone this repository.
+
+```
+git clone https://github.com/DirtyHarryLYL/Transferable-Interactiveness-Network.git
+```
+
+2.Download dataset and setup evaluation and API. (The detection result is collected from: iCAN: Instance-Centric Attention Network for Human-Object Interaction Detection [[website]](http://chengao.vision/iCAN/ ) )
+
+```
+chmod +x ./script/Dataset_download.sh 
+./script/Dataset_download.sh
+```
+
+3.Install Python dependencies.
+
+```
+pip install -r requirements.txt
+```
+
+4.Download our pre-trained weight (Optional)
+
+```
+python script/Download_data.py 1f_w7HQxTfXGxOPrkriu7jTyCTC-KPEH3 weight/TIN_HICO.zip
+python script/Download_data.py 1iU9dN9rLtekcHX2MT_zU_df3Yf0paL9s Weights/TIN_VCOCO.zip
+```
 
 ### Training
 
+1.Train on HICO-DET dataset
+
+```
+python tools/Train_TIN_HICO.py --num_iteration 2000000 --model TIN_HICO_test
+```
+
+2.Train on V-COCO dataset
+
+```
+python tools/Train_TIN_VCOCO.py --num_iteration 20000 --model TIN_VCOCO_test
+```
+
 ### Testing
+
+1.Test on HICO-DET dataset
+
+```
+python tools/Test_TIN_HICO.py --num_iteration 1700000 --model TIN_HICO
+```
+
+2.Test on V-COCO dataset
+
+```
+python tools/Test_TIN_VCOCO.py --num_iteration 6000 --model TIN_VCOCO
+```
+
+## Acknowledgement
+
+Some of the codes are built upon iCAN: Instance-Centric Attention Network for Human-Object Interaction Detection [[website]](http://chengao.vision/iCAN/ ). We thank them for their work.  The pose estimation results are from [AlphaPose](https://github.com/MVIG-SJTU/AlphaPose) . **Alpha Pose** is an accurate multi-person pose estimator, which is the **first real-time** open-source system that achieves **70+ mAP (72.3 mAP)** on COCO dataset and **80+ mAP (82.1 mAP)** on MPII dataset.
+
+You can also follow our new work **HAKE**[[website]](http://hake-mvig.cn/home/), HAKE is a new large-scale knowledge base and engine for human activity understanding. HAKE supplies elaborate and abundant body part state labels for all the active human instances in all the images and frames.
+
+If you get any problems or if you find any bugs, don't hesitate to comment on GitHub or make a pull request! 
+
+TIN(Transferable Interactiveness Network) is freely available for free non-commercial use, and may be redistributed under these conditions.  For commercial queries, please drop an e-mail. We will send the detail agreement to you.
