@@ -2,9 +2,9 @@
 # TIN: Transferable Interactiveness Network             
 Code for our **CVPR2019** paper *"Transferable Interactiveness Knowledge for Human-Object Interaction Detection"*.
 
-Created by [Yong-Lu Li](https://dirtyharrylyl.github.io/), Siyuan Zhou, Xijie Huang, Liang Xu, Ze Ma, Hao-Shu Fang, Yan-Feng Wang, [Cewu Lu](http://mvig.sjtu.edu.cn).
+Created by [Yong-Lu Li](https://dirtyharrylyl.github.io/), Siyuan Zhou, [Xijie Huang](https://huangowen.github.io/), [Liang Xu](https://liangxuy.github.io/), Ze Ma, [Hao-Shu Fang](https://fang-haoshu.github.io/), Yan-Feng Wang, [Cewu Lu](http://mvig.sjtu.edu.cn).
 
-Link: [[Arxiv]](https://arxiv.org/abs/1811.08264)  [Website]
+Link: [[Arxiv]](https://arxiv.org/abs/1811.08264)  [Website] [Poster]
 
 (This repo is still under construction, we would update the code and model this summer.)
 
@@ -28,8 +28,8 @@ Interactiveness Knowledge indicates whether human and object interact with each 
 
 **Our Results on HICO-DET dataset**
 
-|Method| Full(def) | Rare(def) | None-Rare(def)| Full(ko) | Rare(ko) | None-Rare(ko) | 
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|   
+|Method| Full(def) | Rare(def) | None-Rare(def)| Full(ko) | Rare(ko) | None-Rare(ko) |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 |RC<sub>D</sub>| 13.75 | 10.23 | 15.45 | 15.34| 10.98|17.02|
 |RP<sub>D</sub>C<sub>D</sub>| **17.03** | **13.42**| **18.11**| **19.17**| **15.51**|**20.26**|
 |RC<sub>T</sub>| 10.61  | 7.78 | 11.45 | 12.47 | 8.87|13.54|
@@ -39,15 +39,23 @@ Interactiveness Knowledge indicates whether human and object interact with each 
 
 **Our Results on V-COCO dataset**
 
-|Method| Full(def) | 
+|Method| Full(def) |
 |:---:|:---:|
-|RC<sub>D</sub>| 43.2| 
+|RC<sub>D</sub>| 43.2|
 |RP<sub>D</sub>C<sub>D</sub>| **47.8** |
-|RC<sub>T</sub>| 38.5 | 
-|RP<sub>T1</sub>C<sub>D</sub>| 48.3  | 
+|RC<sub>T</sub>| 38.5 |
+|RP<sub>T1</sub>C<sub>D</sub>| 48.3  |
 |RP<sub>T2</sub>C<sub>D</sub>| **48.7**   |
 
 ## Getting Started
+
+### Installation
+
+```
+git clone https://github.com/DirtyHarryLYL/Transferable-Interactiveness-Network.git
+```
+
+Dnowload
 
 ### Prerequisites
 
