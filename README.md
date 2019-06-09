@@ -6,8 +6,6 @@ Created by [Yong-Lu Li](https://dirtyharrylyl.github.io/), Siyuan Zhou, [Xijie H
 
 Link: [[Arxiv]](https://arxiv.org/abs/1811.08264)  [Website] [Poster]
 
-(This repo is still under construction, we would update the code and model this summer.)
-
 ## Citation
 If you find our work useful in your research, please consider citing:
 ```
