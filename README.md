@@ -22,7 +22,7 @@ Interactiveness Knowledge indicates whether human and object interact with each 
 
 ![Overview of Our Framework](https://github.com/DirtyHarryLYL/Transferable-Interactiveness-Network/blob/master/images/overview.jpg?raw=true)
 
-## Results on HICO-DET and V-COCO dataset
+## Results on HICO-DET and V-COCO
 
 **Our Results on HICO-DET dataset**
 
