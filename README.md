@@ -33,7 +33,7 @@ Interactiveness Knowledge indicates whether human and object interact with each 
 |RC<sub>T</sub>| 10.61  | 7.78 | 11.45 | 12.47 | 8.87|13.54|
 |RP<sub>T1</sub>C<sub>D</sub>| 16.91   | 13.32 | 17.99 | 19.05 | 15.22|20.19|
 |RP<sub>T2</sub>C<sub>D</sub>| 17.22   | 13.51 | 18.32 | 19.38 | 15.38|20.57|
-|RP<sub>T2</sub>C<sub>D</sub>(optimized)| **17.54*  | **13.80** | **18.65** | **19.75** | **15.70** |**20.96**|
+|RP<sub>T2</sub>C<sub>D</sub>(optimized)| **17.54**  | **13.80** | **18.65** | **19.75** | **15.70** |**20.96**|
 
 **Our Results on V-COCO dataset**
 
@@ -45,7 +45,7 @@ Interactiveness Knowledge indicates whether human and object interact with each 
 |RP<sub>T1</sub>C<sub>D</sub>| 48.3  |
 |RP<sub>T2</sub>C<sub>D</sub>| **49.0** |
 
-Please note that the results here is different from our paper [[Arxiv]](https://arxiv.org/abs/1811.08264) . It is because **we have improved our codes and method**. The implementation is slightly different from our paper.
+Please note that we have reimplemented and refined our code, thus the results here is slightly better than our paper [[Arxiv]](https://arxiv.org/abs/1811.08264).
 
 ## Getting Started
 
@@ -57,7 +57,7 @@ Please note that the results here is different from our paper [[Arxiv]](https://
 git clone https://github.com/DirtyHarryLYL/Transferable-Interactiveness-Network.git
 ```
 
-2.Download dataset and setup evaluation and API. (The detection result is collected from: iCAN: Instance-Centric Attention Network for Human-Object Interaction Detection [[website]](http://chengao.vision/iCAN/ ) )
+2.Download dataset and setup evaluation and API. (The detection results (person and object boudning boxes) are collected from: iCAN: Instance-Centric Attention Network for Human-Object Interaction Detection [[website]](http://chengao.vision/iCAN/).)
 
 ```
 chmod +x ./script/Dataset_download.sh 
@@ -107,10 +107,11 @@ python tools/Test_TIN_VCOCO.py --num_iteration 6000 --model TIN_VCOCO
 
 ## Acknowledgement
 
-Some of the codes are built upon iCAN: Instance-Centric Attention Network for Human-Object Interaction Detection [[website]](http://chengao.vision/iCAN/ ). We thank them for their work.  The pose estimation results are from [AlphaPose](https://github.com/MVIG-SJTU/AlphaPose) . **Alpha Pose** is an accurate multi-person pose estimator, which is the **first real-time** open-source system that achieves **70+ mAP (72.3 mAP)** on COCO dataset and **80+ mAP (82.1 mAP)** on MPII dataset.
+Some of the codes are built upon iCAN: Instance-Centric Attention Network for Human-Object Interaction Detection [[website]](http://chengao.vision/iCAN/ ). Thanks them for their great work! The pose estimation results are obtained from [AlphaPose](https://github.com/MVIG-SJTU/AlphaPose) . **Alpha Pose** is an accurate multi-person pose estimator, which is the **first real-time** open-source system that achieves **70+ mAP (72.3 mAP)** on COCO dataset and **80+ mAP (82.1 mAP)** on MPII dataset. You may also use your own pose estimation results to train the interactiveness predictor, thus you could directly donwload the train and test pkl files from iCAN [[website]](http://chengao.vision/iCAN/) and insert your pose results.
 
-You can also follow our new work **HAKE**[[website]](http://hake-mvig.cn/home/), HAKE is a new large-scale knowledge base and engine for human activity understanding. HAKE supplies elaborate and abundant body part state labels for all the active human instances in all the images and frames.
+## HAKE
+You may also be interested in our new work **HAKE**[[website]](http://hake-mvig.cn/home/), HAKE is a new large-scale knowledge base and engine for human activity understanding. HAKE provides elaborate and abundant **body part state** labels for active human instances in a large scale of images and videos. With HAKE, we have boosting the HOI recognition performance on HICO and some other widely-used human activity benchmarks. Now we are still enlarging and enriching it, and looking forward to working with outstanding researchers around the world on its applications and further improvements. If you have any advices or interests, please feel free to contact [Yong-Lu Li](https://dirtyharrylyl.github.io/) (yonglu_li@sjtu.edu.cn).
 
 If you get any problems or if you find any bugs, don't hesitate to comment on GitHub or make a pull request! 
 
-TIN(Transferable Interactiveness Network) is freely available for free non-commercial use, and may be redistributed under these conditions.  For commercial queries, please drop an e-mail. We will send the detail agreement to you.
+TIN(Transferable Interactiveness Network) is freely available for free non-commercial use, and may be redistributed under these conditions. For commercial queries, please drop an e-mail. We will send the detail agreement to you.
