@@ -1,7 +1,6 @@
 # --------------------------------------------------------
 # Tensorflow TIN
 # Licensed under The MIT License [see LICENSE for details]
-# Written by Yonglu Li, Xijie Huang
 # --------------------------------------------------------
 
 from __future__ import absolute_import
@@ -120,9 +119,9 @@ def apply_prior(Object_class, prediction):
 def generate_pkl(mode, test_D, test_result, prior_mask, Action_dic_inv, sigmoid_coeff, prior_flag = 3):
     generate_result = []
 
-    for fuck in range(len(test_result)):
-        dic = test_result[fuck]
-        dic_d = test_D[fuck]
+    for tr in range(len(test_result)):
+        dic = test_result[tr]
+        dic_d = test_D[tr]
 
         image_id = dic['image_id']
         bbox_H = dic['person_box']
@@ -147,7 +146,7 @@ def generate_pkl(mode, test_D, test_result, prior_mask, Action_dic_inv, sigmoid_
         length_d = len(score_binary_d)
 
         if length != length_d:
-            print('fuckkk')
+            print('wrong')
             continue
 
         dic_new = {}

@@ -3,13 +3,7 @@
 # --------------------------------------------------------
 # Tensorflow TIN
 # Licensed under The MIT License [see LICENSE for details]
-# Written by Yonglu Li, Xijie Huang
 # --------------------------------------------------------
-
-# mkdir for log, weight and data
-mkdir Weights/
-mkdir logs/
-mkdir Data/
 
 # ---------------V-COCO Dataset------------------
 echo "Downloading V-COCO Dataset"
@@ -68,7 +62,7 @@ mkdir Data/ho-rcnn/data/hico_20160224_det/
 cp HICO-DET_Benchmark/data/hico_20160224_det/anno_bbox.mat Data/ho-rcnn/data/hico_20160224_det/
 cp HICO-DET_Benchmark/data/hico_20160224_det/anno.mat Data/ho-rcnn/data/hico_20160224_det/
 
-#mkdir -Results/
+mkdir -Results/
 
 echo "Downloading training data..."
 python script/Download_data.py 1z5iZWJsMl4hafo0u7f1mVj7A2S5HQBOD Data/action_index.json

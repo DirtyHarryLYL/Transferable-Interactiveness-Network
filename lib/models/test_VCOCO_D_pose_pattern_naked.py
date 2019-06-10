@@ -1,7 +1,6 @@
 # --------------------------------------------------------
 # Tensorflow TIN
 # Licensed under The MIT License [see LICENSE for details]
-# Written by Yonglu Li, Xijie Huang
 # --------------------------------------------------------
 
 from __future__ import absolute_import
@@ -88,7 +87,6 @@ def im_detect(sess, net, image_id, Test_RCNN, prior_mask, Action_dic_inv, object
                     HO_Score.append(prediction_HO)
                     Object_det.append(np.max(Object[5]))
 
-            # There is only a single human detected in this image. I just ignore it. Might be better to add Nan as object box.
             if len(Object_bbox) == 0:
                 continue
 

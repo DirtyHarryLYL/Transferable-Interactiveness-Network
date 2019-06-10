@@ -1,7 +1,6 @@
 # --------------------------------------------------------
 # Tensorflow TIN
 # Licensed under The MIT License [see LICENSE for details]
-# Written by Yonglu Li, Xijie Huang
 # --------------------------------------------------------
 
 from __future__ import absolute_import
@@ -25,7 +24,7 @@ cfg = __C
 __C.TRAIN = edict()
 ###########################################################################################
 # Training loss setting: 1--H+O+SP+D, 2--H+O+SP, 3--D, 4--H+O, 5--SP 6--without h o sp
-__C.TRAIN_MODULE = 1 # do not change this for the reason of NONE grads
+__C.TRAIN_MODULE = 1
 
 # Training setting: 1--Update_all_parameter, 2--Only_Update_D, 3--Update_H+O+SP, 4--update except classifiers of S(fc), 5--without h o p
 __C.TRAIN_MODULE_UPDATE = 1

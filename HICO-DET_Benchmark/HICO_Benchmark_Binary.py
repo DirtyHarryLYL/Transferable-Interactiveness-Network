@@ -2,7 +2,6 @@
 # Tensorflow TIN
 # HICO Binary Score Benchmark (Version2), for 520 binary label
 # Licensed under The MIT License [see LICENSE for details]
-# Written by Yonglu Li, Xijie Huang
 # --------------------------------------------------------
 
 import pickle
@@ -97,7 +96,6 @@ def deal_with_det(det_file):
     c_80_score = []
     c_520_score = []
 
-
     for image_id, value in det_file.iteritems(): # traverse all items in pkl file
 
         image_index = test_image_all.index(image_id) # image_id is not image index in gt
@@ -111,10 +109,8 @@ def deal_with_det(det_file):
             bbox_h_det = map(int, element[0].tolist()) # in format (x1,y1,x2,y2)
             bbox_o_det = map(int, element[1].tolist()) # in format (x1,y1,x2,y2)
 
-    
             prob_inter = element[6][0] # d score of inter
             prob_no_inter = element[6][1] # d score of no-inter
-
 
             d_score_inter[pair_id] = prob_inter
             d_score_no_inter[pair_id] = prob_no_inter
@@ -181,7 +177,6 @@ def deal_with_det(det_file):
                     a_binary_score_no += d_score_no_inter[pair_id]
                     a_80_score.append(d_score_no_inter[pair_id])
                     a_520_score.append(d_score_inter[pair_id])
-
 
             else:
             	no_inter_label[pair_id] = 1 # give no_inter labels
@@ -258,7 +253,6 @@ def deal_with_det_del_pair(det_file,binary_rank_rank):
     b_pair = np.zeros(num_pairs, dtype = 'float32')
     c_pair = np.zeros(num_pairs, dtype = 'float32')
 
-
     for image_id, value in det_file.iteritems(): # traverse all items in pkl file
 
         image_index = test_image_all.index(image_id) # image_id is not image index in gt
@@ -284,8 +278,7 @@ def deal_with_det_del_pair(det_file,binary_rank_rank):
             flag_save = 1
 
             # print("rank:",possible_hoi_range[1]-1][pair_id])
-
-            #print('now pair id',pair_id)
+            # print('now pair id',pair_id)
                     
             for index, hoi in enumerate(list_hoi_gt):
 

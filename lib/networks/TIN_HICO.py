@@ -1,7 +1,6 @@
 # --------------------------------------------------------
 # Tensorflow TIN
 # Licensed under The MIT License [see LICENSE for details]
-# Written by Yonglu Li, Xijie Huang
 # --------------------------------------------------------
 
 from __future__ import absolute_import
@@ -51,98 +50,6 @@ def resnet_arg_scope(is_training=True,
         with arg_scope([slim.batch_norm], **batch_norm_params) as arg_sc:
             return arg_sc
 
-"""Contains definitions for the original form of Residual Networks.
-The 'v1' residual networks (ResNets) implemented in this module were proposed
-by:
-[1] Kaiming He, Xiangyu Zhang, Shaoqing Ren, Jian Sun
-    Deep Residual Learning for Image Recognition. arXiv:1512.03385
-Other variants were introduced in:
-[2] Kaiming He, Xiangyu Zhang, Shaoqing Ren, Jian Sun
-    Identity Mappings in Deep Residual Networks. arXiv: 1603.05027
-The networks defined in this module utilize the bottleneck building block of
-[1] with projection shortcuts only for increasing depths. They employ batch
-normalization *after* every weight layer. This is the architecture used by
-MSRA in the Imagenet and MSCOCO 2016 competition models ResNet-101 and
-ResNet-152. See [2; Fig. 1a] for a comparison between the current 'v1'
-architecture and the alternative 'v2' architecture of [2] which uses batch
-normalization *before* every weight layer in the so-called full pre-activation
-units.
-Typical use:
-   from tensorflow.contrib.slim.python.slim.nets import resnet_v1
-ResNet-101 for image classification into 1000 classes:
-   # inputs has shape [batch, 224, 224, 3]
-   with slim.arg_scope(resnet_v1.resnet_arg_scope()):
-      net, end_points = resnet_v1.resnet_v1_101(inputs, 1000, is_training=False)
-ResNet-101 for semantic segmentation into 21 classes:
-   # inputs has shape [batch, 513, 513, 3]
-   with slim.arg_scope(resnet_v1.resnet_arg_scope()):
-      net, end_points = resnet_v1.resnet_v1_101(inputs,
-                                                21,
-                                                is_training=False,
-                                                global_pool=False,
-                                                output_stride=16)
-"""
-"""
-Helper function for creating a resnet_v1 bottleneck block.
-  Args:
-    scope: The scope of the block.
-    base_depth: The depth of the bottleneck layer for each unit.
-    num_units: The number of units in the block.
-    stride: The stride of the block, implemented as a stride in the last unit.
-      All other units have stride=1.
-  Returns:
-    A resnet_v1 bottleneck block.
-"""
-"""Generator for v1 ResNet models.
-  This function generates a family of ResNet v1 models. See the resnet_v1_*()
-  methods for specific model instantiations, obtained by selecting different
-  block instantiations that produce ResNets of various depths.
-  Training for image classification on Imagenet is usually done with [224, 224]
-  inputs, resulting in [7, 7] feature maps at the output of the last ResNet
-  block for the ResNets defined in [1] that have nominal stride equal to 32.
-  However, for dense prediction tasks we advise that one uses inputs with
-  spatial dimensions that are multiples of 32 plus 1, e.g., [321, 321]. In
-  this case the feature maps at the ResNet output will have spatial shape
-  [(height - 1) / output_stride + 1, (width - 1) / output_stride + 1]
-  and corners exactly aligned with the input image corners, which greatly
-  facilitates alignment of the features to the image. Using as input [225, 225]
-  images results in [8, 8] feature maps at the output of the last ResNet block.
-  For dense prediction tasks, the ResNet needs to run in fully-convolutional
-  (FCN) mode and global_pool needs to be set to False. The ResNets in [1, 2] all
-  have nominal stride equal to 32 and a good choice in FCN mode is to use
-  output_stride=16 in order to increase the density of the computed features at
-  small computational and memory overhead, cf. http://arxiv.org/abs/1606.00915.
-
-  Args:
-    inputs: A tensor of size [batch, height_in, width_in, channels].
-    blocks: A list of length equal to the number of ResNet blocks. Each element
-      is a resnet_utils.Block object describing the units in the block.
-    num_classes: Number of predicted classes for classification tasks. If None
-      we return the features before the logit layer.
-    is_training: whether batch_norm layers are in training mode.
-    global_pool: If True, we perform global average pooling before computing the
-      logits. Set to True for image classification, False for dense prediction.
-    output_stride: If None, then the output will be computed at the nominal
-      network stride. If output_stride is not None, it specifies the requested
-      ratio of input to output spatial resolution.
-    include_root_block: If True, include the initial convolution followed by
-      max-pooling, if False excludes it.
-    reuse: whether or not the network and its variables should be reused. To be
-      able to reuse 'scope' must be given.
-    scope: Optional variable_scope.
-  Returns:
-    net: A rank-4 tensor of size [batch, height_out, width_out, channels_out].
-      If global_pool is False, then height_out and width_out are reduced by a
-      factor of output_stride compared to the respective height_in and width_in,
-      else both height_out and width_out equal one. If num_classes is None, then
-      net is the output of the last ResNet block, potentially after global
-      average pooling. If num_classes is not None, net contains the pre-softmax
-      activations.
-    end_points: A dictionary from components of the network to the corresponding
-      activation.
-  Raises:
-    ValueError: If the target output_stride is not valid.
-"""
 class ResNet50(): # 64--128--256--512--512
     def __init__(self):
         self.visualize = {}
@@ -242,12 +149,6 @@ class ResNet50(): # 64--128--256--512--512
                            resnet_v1_block('block3', base_depth=256, num_units=6, stride=1), # feature former
                            resnet_v1_block('block4', base_depth=512, num_units=3, stride=1),
                            resnet_v1_block('block5', base_depth=512, num_units=3, stride=1)]
-  # Args:
-  #   scope: The scope of the block.
-  #   base_depth: The depth of the bottleneck layer for each unit.
-  #   num_units: The number of units in the block.
-  #   stride: The stride of the block, implemented as a stride in the last unit.
-  #     All other units have stride=1.
 
     def build_base(self):
         with tf.variable_scope(self.scope, self.scope):
@@ -294,12 +195,11 @@ class ResNet50(): # 64--128--256--512--512
 
         return pool2_flat_sp
 
-    # the fifth residual block in paper, in block before GAP
     def res5(self, pool5_H, pool5_O, sp, is_training, name):
         with slim.arg_scope(resnet_arg_scope(is_training=is_training)):
 
             fc7_H, _ = resnet_v1.resnet_v1(pool5_H, # H input, one block
-                                           self.blocks[-2:-1], #fourth block
+                                           self.blocks[-2:-1],
                                            global_pool=False,
                                            include_root_block=False,
                                            reuse=False,
@@ -309,7 +209,7 @@ class ResNet50(): # 64--128--256--512--512
 
 
             fc7_O, _ = resnet_v1.resnet_v1(pool5_O, # O input, one block
-                                       self.blocks[-1:], #fifth block
+                                       self.blocks[-1:],
                                        global_pool=False,
                                        include_root_block=False,
                                        reuse=False,
@@ -319,7 +219,6 @@ class ResNet50(): # 64--128--256--512--512
         
         return fc7_H, fc7_O
 
-    # GAP + fc
     def head_to_tail(self, fc7_H, fc7_O, pool5_SH, pool5_SO, sp, is_training, name):
         with slim.arg_scope(resnet_arg_scope(is_training=is_training)):
 
@@ -344,23 +243,12 @@ class ResNet50(): # 64--128--256--512--512
             fc7_SHsp      = slim.fully_connected(Concat_SHsp, self.num_fc, scope='fc7_SHsp')
             fc7_SHsp      = slim.dropout(fc7_SHsp,  keep_prob=0.5, is_training=is_training, scope='dropout7_SHsp')
 
-            # Concat_HOS   = tf.concat([fc7_H, \
-            #                           fc7_O, \
-            #                           fc7_SH,\
-            #                           fc7_SO, sp], 1)
-
-
-        # add 2 returns here
-        return fc9_SH, fc9_SO, fc7_SHsp, fc7_SH, fc7_SO #Concat_SH, Concat_SO
+        return fc9_SH, fc9_SO, fc7_SHsp, fc7_SH, fc7_SO
 
     # binary discriminator for 0/1 classification of interaction, fc7_H, fc7_SH, fc7_O, fc7_SO, sp
     def binary_discriminator(self, fc7_H, fc7_O, fc7_SH, fc7_SO, sp, is_training, name):
         with tf.variable_scope(name) as scope:
-            # fc7_H  [37,2048], first dimension is pos + neg
-            # fc7_O  [16,2048], first dimension is pos
-            # fc7_SH [37,1024], first dimension is pos + neg
-            # fc7_SO [16,1024], first dimension is pos
-            # sp     first dimension is pos + neg
+
             conv1_pose_map      = slim.conv2d(self.spatial[:,:,:,2:], 32, [5, 5], padding='VALID', scope='conv1_pose_map')
             pool1_pose_map      = slim.max_pool2d(conv1_pose_map, [2, 2], scope='pool1_pose_map')
             conv2_pose_map      = slim.conv2d(pool1_pose_map,     16, [5, 5], padding='VALID', scope='conv2_pose_map')
@@ -484,10 +372,8 @@ class ResNet50(): # 64--128--256--512--512
                                                trainable=is_training,
                                                activation_fn=None, scope='cls_score_sp')
             cls_prob_sp  = tf.nn.sigmoid(cls_score_sp, name='cls_prob_sp') 
-            tf.reshape(cls_prob_sp, [1, self.num_classes]) # actually did not use prob to conpute loss...
+            tf.reshape(cls_prob_sp, [1, self.num_classes])
 
-            #sss = tf.concat([cls_score_H, fc7_H],0)
-            #ipdb.set_trace()
             self.predictions["cls_score_H"]  = cls_score_H
             self.predictions["cls_prob_H"]   = cls_prob_H
             self.predictions["cls_score_O"]  = cls_score_O
@@ -503,7 +389,7 @@ class ResNet50(): # 64--128--256--512--512
         with tf.variable_scope(name) as scope:
 
             if reuse:
-                scope.reuse_variables() # won't generate new variable
+                scope.reuse_variables()
 
             head_bottleneck = slim.conv2d(bottom, 1024, [1, 1], scope=name) # 1x1, 1024, fc
 
@@ -520,10 +406,10 @@ class ResNet50(): # 64--128--256--512--512
 
         fc7_H, fc7_O = self.res5(pool5_H, pool5_O, sp, is_training, 'res5')
 
-        # Phi, whole image feature
+        # whole image feature
         head_phi = slim.conv2d(head, 512, [1, 1], scope='head_phi')
 
-        # g, whole image feature
+        # whole image feature
         head_g   = slim.conv2d(head, 512, [1, 1], scope='head_g')
 
         Att_H      = self.attention_pool_layer_H(head_phi, fc7_H, is_training, 'Att_H')
@@ -538,25 +424,13 @@ class ResNet50(): # 64--128--256--512--512
         pool5_SO     = self.bottleneck(att_head_O, is_training, 'bottleneck', True)
 
         fc9_SH, fc9_SO, fc7_SHsp, fc7_SH, fc7_SO = self.head_to_tail(fc7_H, fc7_O, pool5_SH, pool5_SO, sp, is_training, 'fc_HO')
-        #ipdb.set_trace()
         fc9_binary = self.binary_discriminator(fc7_H, fc7_O, fc7_SH, fc7_SO, sp, is_training, 'fc_binary')
-        # with tf.Session() as sess:
-        #   print("************************")
-        #   print("fc7_SH:", fc7_SH.shape(), ", fc7_SO", fc7_SO.shape(), ", fc7_H", fc7_H.shape(), ", fc7_O", fc7_O.shape())
-        #   print("************************")
-        #   print("Concat_SH:", Concat_SH.shape(), ", Concat_SO", Concat_SO.shape(), ", sp", sp.shape())
-        #   print("************************")
-        # ************************
-        # fc7_SH: (?, 1024) , fc7_SO (?, 1024) , fc7_H (?, 2048) , fc7_O (?, 2048)
-        # ************************
-        # Concat_SH: (?, 3072) , Concat_SO (?, 3072) , sp (?, 5408)
-        # ************************
+
         cls_prob_H, cls_prob_O, cls_prob_sp = self.region_classification(fc9_SH, fc9_SO, fc7_SHsp, is_training, initializer, 'classification')
 
         # add a Discriminator here to make binary classification
-        # 3072, 3072, 5408, concat--fc--fc--binary loss
         cls_prob_binary = self.binary_classification(fc9_binary, is_training, initializer, 'binary_classification')
-        # ipdb.set_trace()
+
         self.score_summaries.update(self.predictions)
         self.visualize["attention_map_H"] = (Att_H - tf.reduce_min(Att_H[0,:,:,:])) / tf.reduce_max((Att_H[0,:,:,:] - tf.reduce_min(Att_H[0,:,:,:])))
         self.visualize["attention_map_O"] = (Att_O - tf.reduce_min(Att_O[0,:,:,:])) / tf.reduce_max((Att_O[0,:,:,:] - tf.reduce_min(Att_O[0,:,:,:])))
@@ -566,7 +440,6 @@ class ResNet50(): # 64--128--256--512--512
 
     def create_architecture(self, is_training):
 
-        # cls_prob_H, cls_prob_O, cls_prob_sp = self.build_network(is_training)
         cls_prob_H, cls_prob_O, cls_prob_sp, cls_prob_binary = self.build_network(is_training)
 
         for var in tf.trainable_variables():
@@ -611,22 +484,16 @@ class ResNet50(): # 64--128--256--512--512
             label_HO     = self.gt_class_HO
             label_binary = self.gt_binary_label
 
-            # Discriminator needs all samples, pos + neg
             binary_cross_entropy = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(labels = label_binary, logits = cls_score_binary_with_weight))
-            # H and O stream only use positive samples' grads, but H's inputs are pos + neg(because sp stream needs feature from H stream)
             H_cross_entropy  = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(labels = label_HO[:self.H_num,:], logits = cls_score_H_with_weight[:self.H_num,:]))
-            # O's inputs are pos
             O_cross_entropy  = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(labels = label_HO[:self.H_num,:], logits = cls_score_O_with_weight[:self.H_num,:])) # fake :self.H_num
-            # sp stream uses all samples
             sp_cross_entropy = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(labels = label_HO, logits = cls_score_sp_with_weight))
-            # ipdb.set_trace()
+
             self.losses['binary_cross_entropy'] = binary_cross_entropy
             self.losses['H_cross_entropy']  = H_cross_entropy
             self.losses['O_cross_entropy']  = O_cross_entropy
             self.losses['sp_cross_entropy'] = sp_cross_entropy
 
-            # we may need interative training of S and D, so we add a switch here to control total loss
-            # 1--H+O+SP+D, 2--H+O+SP, 3--D, 4--H+O, 5--SP
             if cfg.TRAIN_MODULE == 1:
               loss = H_cross_entropy + O_cross_entropy + sp_cross_entropy + binary_cross_entropy
             elif cfg.TRAIN_MODULE == 2:

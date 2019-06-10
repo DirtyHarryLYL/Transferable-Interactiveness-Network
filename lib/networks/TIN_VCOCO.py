@@ -1,7 +1,6 @@
 # --------------------------------------------------------
 # Tensorflow TIN
 # Licensed under The MIT License [see LICENSE for details]
-# Written by Yonglu Li, Xijie Huang
 # --------------------------------------------------------
 
 from __future__ import absolute_import
@@ -170,18 +169,10 @@ class ResNet50():
 
     def head_to_tail(self, fc7_H, fc7_O, pool5_SH, pool5_SO, sp, is_training, name):
         with slim.arg_scope(resnet_arg_scope(is_training=is_training)):
-            # fc7_H  first dimension is pos + neg
-            # fc7_O  first dimension is pos
-            # fc7_SH first dimension is pos
-            # fc7_SO first dimension is pos
-            # sp     first dimension is pos + neg
-            
-            # pos
+
             fc7_SH = tf.reduce_mean(pool5_SH, axis=[1, 2])
-            # pos
             fc7_SO = tf.reduce_mean(pool5_SO, axis=[1, 2])
 
-            # pos
             Concat_SH     = tf.concat([fc7_H[:self.H_num,:], fc7_SH], 1)
 
             fc8_SH        = slim.fully_connected(Concat_SH, self.num_fc, scope='fc8_SH')
@@ -189,8 +180,6 @@ class ResNet50():
             fc9_SH        = slim.fully_connected(fc8_SH, self.num_fc, scope='fc9_SH')
             fc9_SH        = slim.dropout(fc9_SH, keep_prob=0.5, is_training=is_training, scope='dropout9_SH')  
 
-
-            # pos
             Concat_SO     = tf.concat([fc7_O, fc7_SO], 1)
 
             fc8_SO        = slim.fully_connected(Concat_SO, self.num_fc, scope='fc8_SO')
@@ -198,27 +187,18 @@ class ResNet50():
             fc9_SO        = slim.fully_connected(fc8_SO, self.num_fc, scope='fc9_SO')
             fc9_SO        = slim.dropout(fc9_SO,    keep_prob=0.5, is_training=is_training, scope='dropout9_SO')  
 
-
-            # pos + neg
             Concat_SHsp   = tf.concat([fc7_H, sp], 1)
             Concat_SHsp   = slim.fully_connected(Concat_SHsp, self.num_fc, scope='Concat_SHsp')
             Concat_SHsp   = slim.dropout(Concat_SHsp, keep_prob=0.5, is_training=is_training, scope='dropout6_SHsp')
             fc7_SHsp      = slim.fully_connected(Concat_SHsp, self.num_fc, scope='fc7_SHsp')
             fc7_SHsp      = slim.dropout(fc7_SHsp,  keep_prob=0.5, is_training=is_training, scope='dropout7_SHsp')
 
-
-        # pos, pos, pos+neg, pos, pos
         return fc9_SH, fc9_SO, fc7_SHsp, fc7_SH, fc7_SO
 
     # binary discriminator for 0/1 classification of interaction, fc7_H, fc7_SH, fc7_O, fc7_SO, sp
     def binary_discriminator(self, fc7_H, fc7_O, fc7_SH, fc7_SO, sp, is_training, name):
         with tf.variable_scope(name) as scope:
-            # fc7_H  first dimension is pos + neg
-            # fc7_O  first dimension is pos
-            # fc7_SH first dimension is pos
-            # fc7_SO first dimension is pos
 
-            # sp     first dimension is pos + neg
             conv1_pose_map      = slim.conv2d(self.spatial[:,:,:,2:], 32, [5, 5], padding='VALID', scope='conv1_pose_map')
             pool1_pose_map      = slim.max_pool2d(conv1_pose_map, [2, 2], scope='pool1_pose_map')
             conv2_pose_map      = slim.conv2d(pool1_pose_map,     16, [5, 5], padding='VALID', scope='conv2_pose_map')
@@ -337,7 +317,7 @@ class ResNet50():
             self.predictions["cls_score_sp"] = cls_score_sp
             self.predictions["cls_prob_sp"]  = cls_prob_sp
 
-            self.predictions["cls_prob_HO_final"]  = cls_prob_sp * (cls_prob_O + cls_prob_H) #???pos-neg and pos
+            self.predictions["cls_prob_HO_final"]  = cls_prob_sp * (cls_prob_O + cls_prob_H)
 
         return cls_prob_H, cls_prob_O, cls_prob_sp
 
@@ -371,40 +351,30 @@ class ResNet50():
 
         # ResNet Backbone
         head       = self.image_to_head(is_training)
-        sp         = self.sp_to_head() # Pattern.reshape( num_pos_neg, 64, 64, 2) 
-        pool5_H    = self.crop_pool_layer(head, self.Hsp_boxes, 'Crop_H') # Human_augmented.reshape( num_pos_neg, 5) 
-        pool5_O    = self.crop_pool_layer(head, self.O_boxes,   'Crop_O') # Object_augmented[:num_pos].reshape(num_pos, 5)
+        sp         = self.sp_to_head()
+        pool5_H    = self.crop_pool_layer(head, self.Hsp_boxes, 'Crop_H')
+        pool5_O    = self.crop_pool_layer(head, self.O_boxes,   'Crop_O')
 
-        # pos + neg, pos
         fc7_H, fc7_O = self.res5(pool5_H, pool5_O, sp, is_training, 'res5')
 
-        # Phi 
         head_phi = slim.conv2d(head, 512, [1, 1], scope='head_phi')
 
-        # g 
         head_g   = slim.conv2d(head, 512, [1, 1], scope='head_g')
 
-        # pos
         Att_H      = self.attention_pool_layer_H(head_phi, fc7_H[:self.H_num,:], is_training, 'Att_H')
         Att_H      = self.attention_norm_H(Att_H, 'Norm_Att_H')
         att_head_H = tf.multiply(head_g, Att_H)
 
-        # pos
         Att_O      = self.attention_pool_layer_O(head_phi, fc7_O, is_training, 'Att_O')
         Att_O      = self.attention_norm_O(Att_O, 'Norm_Att_O')
         att_head_O = tf.multiply(head_g, Att_O)
 
-        # pos
         pool5_SH     = self.bottleneck(att_head_H, is_training, 'bottleneck', False)
-        # pos
         pool5_SO     = self.bottleneck(att_head_O, is_training, 'bottleneck', True)
 
-
-        # pos, pos, pos+neg, pos, pos
         fc9_SH, fc9_SO, fc7_SHsp, fc7_SH, fc7_SO = self.head_to_tail(fc7_H, fc7_O, pool5_SH, pool5_SO, sp, is_training, 'fc_HO')
         fc9_binary = self.binary_discriminator(fc7_H, fc7_O, fc7_SH, fc7_SO, sp, is_training, 'fc_binary')
 
-        # pos, pos, pos+neg
         cls_prob_H, cls_prob_O, cls_prob_sp = self.region_classification(fc9_SH, fc9_SO, fc7_SHsp, is_training, initializer, 'classification')
         cls_prob_binary = self.binary_classification(fc9_binary, is_training, initializer, 'binary_classification')
 
@@ -413,7 +383,6 @@ class ResNet50():
         self.visualize["attention_map_H"] = (Att_H - tf.reduce_min(Att_H[0,:,:,:])) / tf.reduce_max((Att_H[0,:,:,:] - tf.reduce_min(Att_H[0,:,:,:])))
         self.visualize["attention_map_O"] = (Att_O - tf.reduce_min(Att_O[0,:,:,:])) / tf.reduce_max((Att_O[0,:,:,:] - tf.reduce_min(Att_O[0,:,:,:])))
         return cls_prob_H, cls_prob_O, cls_prob_sp, cls_prob_binary
-
 
 
     def create_architecture(self, is_training):
@@ -450,9 +419,9 @@ class ResNet50():
     def add_loss(self):
 
         with tf.variable_scope('LOSS') as scope:
-            cls_score_H  = self.predictions["cls_score_H"] # pos
-            cls_score_O  = self.predictions["cls_score_O"] # pos
-            cls_score_sp = self.predictions["cls_score_sp"] # pos + neg
+            cls_score_H  = self.predictions["cls_score_H"]
+            cls_score_O  = self.predictions["cls_score_O"]
+            cls_score_sp = self.predictions["cls_score_sp"]
             cls_score_binary = self.predictions["cls_score_binary"]
 
             cls_score_H_with_weight = tf.multiply(cls_score_H, self.H_weight)
@@ -460,14 +429,14 @@ class ResNet50():
             # cls_score_sp_with_weight = tf.multiply(cls_score_sp, self.HO_weight)
             cls_score_binary_with_weight = tf.multiply(cls_score_binary, self.binary_weight)
 
-            label_H      = self.gt_class_H # pos
-            label_HO     = self.gt_class_HO # pos
-            label_sp     = self.gt_class_sp # pos + neg
-            label_binary = self.gt_binary_label # pos + neg
+            label_H      = self.gt_class_H
+            label_HO     = self.gt_class_HO
+            label_sp     = self.gt_class_sp
+            label_binary = self.gt_binary_label
 
-            H_mask       = self.Mask_H # pos
-            HO_mask      = self.Mask_HO # pos
-            sp_mask      = self.Mask_sp # pos + neg
+            H_mask       = self.Mask_H
+            HO_mask      = self.Mask_HO
+            sp_mask      = self.Mask_sp
 
             H_cross_entropy  = tf.reduce_mean(tf.multiply(tf.nn.sigmoid_cross_entropy_with_logits(labels = label_H,  logits = cls_score_H_with_weight),   H_mask))
             HO_cross_entropy = tf.reduce_mean(tf.multiply(tf.nn.sigmoid_cross_entropy_with_logits(labels = label_HO, logits = cls_score_O_with_weight),  HO_mask))

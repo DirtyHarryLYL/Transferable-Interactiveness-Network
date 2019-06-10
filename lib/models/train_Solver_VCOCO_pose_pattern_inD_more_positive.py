@@ -1,7 +1,6 @@
 # --------------------------------------------------------
 # Tensorflow TIN
 # Licensed under The MIT License [see LICENSE for details]
-# Written by Yonglu Li, Xijie Huang
 # --------------------------------------------------------
 
 from __future__ import absolute_import
@@ -32,7 +31,7 @@ class SolverWrapper(object):
     A wrapper class for the training process
     """
 
-    def __init__(self, sess, network, Trainval_GT, Trainval_N, output_dir, tbdir, Pos_augment, Neg_select, iCAN_Early_flag, Restore_flag, pretrained_model, interval_divide):
+    def __init__(self, sess, network, Trainval_GT, Trainval_N, output_dir, tbdir, Pos_augment, Neg_select, Early_flag, Restore_flag, pretrained_model, interval_divide):
 
         self.net               = network
         self.Trainval_GT       = self.changeForm(Trainval_GT, interval_divide)
@@ -41,7 +40,7 @@ class SolverWrapper(object):
         self.tbdir             = tbdir
         self.Pos_augment       = Pos_augment
         self.Neg_select        = Neg_select
-        self.iCAN_Early_flag   = iCAN_Early_flag
+        self.Early_flag        = Early_flag
         self.Restore_flag      = Restore_flag
         self.pretrained_model  = pretrained_model
 
@@ -237,7 +236,7 @@ class SolverWrapper(object):
     def from_best_trained_model(self, sess):
 
         sess.run(tf.global_variables_initializer())
-        for var in tf.trainable_variables(): # trainable weights, we need surgery
+        for var in tf.trainable_variables():
             print(var.name, var.eval().mean())
 
         print('Restoring model snapshots from {:s}'.format(self.pretrained_model))
@@ -299,20 +298,18 @@ class SolverWrapper(object):
 
             timer.tic()
 
-            if self.iCAN_Early_flag == 1:
+            if self.Early_flag == 1:
                 blobs = Get_Next_Instance_HO_Neg_pose_pattern_version2(self.Trainval_GT, self.Trainval_N, iter, self.Pos_augment, self.Neg_select, Data_length)
  
-            if self.iCAN_Early_flag == 0: # Pos + spNeg (factorized model only)  
+            if self.Early_flag == 0: # Pos + spNeg (factorized model only)  
                 blobs = Get_Next_Instance_HO_spNeg_pose_pattern_version2(self.Trainval_GT, self.Trainval_N, iter, self.Pos_augment, self.Neg_select, Data_length)
 
             if (iter % cfg.TRAIN.SUMMARY_INTERVAL == 0) or (iter < 20):
 
-                # Compute the graph with summary
                 loss_cls_H, loss_cls_HO, total_loss, summary = self.net.train_step_with_summary(sess, blobs, lr.eval(), train_op)
                 self.writer.add_summary(summary, float(iter))
 
             else:
-                # Compute the graph without summary
                 loss_cls_H, loss_cls_HO, total_loss = self.net.train_step(sess, blobs, lr.eval(), train_op)
 
             timer.toc()
@@ -332,7 +329,7 @@ class SolverWrapper(object):
         self.writer.close()
 
                                                                             
-def train_net(network, Trainval_GT, Trainval_N, output_dir, tb_dir, Pos_augment, Neg_select, iCAN_Early_flag, Restore_flag, pretrained_model, max_iters=300000):
+def train_net(network, Trainval_GT, Trainval_N, output_dir, tb_dir, Pos_augment, Neg_select, Early_flag, Restore_flag, pretrained_model, max_iters=300000):
     
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
@@ -356,8 +353,8 @@ def train_net(network, Trainval_GT, Trainval_N, output_dir, tb_dir, Pos_augment,
     interval_divide = 5
 
     with tf.Session(config=tfconfig) as sess:
-        sw = SolverWrapper(sess, network, Trainval_GT, Trainval_N, output_dir, tb_dir, Pos_augment, Neg_select, iCAN_Early_flag, Restore_flag, pretrained_model, interval_divide)
+        sw = SolverWrapper(sess, network, Trainval_GT, Trainval_N, output_dir, tb_dir, Pos_augment, Neg_select, Early_flag, Restore_flag, pretrained_model, interval_divide)
         
-        print('Solving..., Pos augment = ' + str(Pos_augment) + ', Neg augment = ' + str(Neg_select) + ', iCAN_Early_flag = ' + str(iCAN_Early_flag) + ', Restore_flag = ' + str(Restore_flag))
+        print('Solving..., Pos augment = ' + str(Pos_augment) + ', Neg augment = ' + str(Neg_select) + ', Early_flag = ' + str(Early_flag) + ', Restore_flag = ' + str(Restore_flag))
         sw.train_model(sess, max_iters)
         print('done solving')

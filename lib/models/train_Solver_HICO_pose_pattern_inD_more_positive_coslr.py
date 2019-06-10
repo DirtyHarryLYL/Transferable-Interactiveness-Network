@@ -1,7 +1,6 @@
 # --------------------------------------------------------
 # Tensorflow TIN
 # Licensed under The MIT License [see LICENSE for details]
-# Written by Yonglu Li, Xijie Huang
 # --------------------------------------------------------
 
 from __future__ import absolute_import
@@ -97,7 +96,8 @@ class SolverWrapper(object):
                 global_step    = tf.Variable(0, trainable=False)
 
             #lr             = tf.train.exponential_decay(cfg.TRAIN.LEARNING_RATE * 10, global_step, cfg.TRAIN.STEPSIZE * 5, cfg.TRAIN.GAMMA, staircase=True) 
-            first_decay_steps = 80000 # need test, 2 epoches
+            # here we use cos lr scheme, i.e. 
+            first_decay_steps = 80000 # 2 epoches
             lr = cosine_decay_restarts(cfg.TRAIN.LEARNING_RATE * 10, global_step, first_decay_steps, t_mul=2.0, m_mul=1.0, alpha=0.0) 
             self.optimizer = tf.train.MomentumOptimizer(lr, cfg.TRAIN.MOMENTUM)
 

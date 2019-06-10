@@ -1,7 +1,6 @@
 # --------------------------------------------------------
 # Tensorflow TIN
 # Licensed under The MIT License [see LICENSE for details]
-# Written by Yonglu Li, Xijie Huang
 # --------------------------------------------------------
 
 """
@@ -68,7 +67,7 @@ def save_HICO(HICO, HICO_dir, thres_no_inter, thres_inter, classid, begin, finis
                     d_score = binary_score_inter[pair_id]
                     d_score_noi = binary_score_nointer[pair_id]
 
-                    # you can change the parameter of NIS (sigmoid function) here
+                    # you could change the parameter of NIS (sigmoid function) here
                     # use (10, 1.4, 0) as the default 
                     score_old = element[3][begin - 1 + i] * getSigmoid(10,1.4,0,element[4]) * getSigmoid(10,1.4,0,element[5])
 

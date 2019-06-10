@@ -1,7 +1,6 @@
 # --------------------------------------------------------
 # Tensorflow TIN
 # Licensed under The MIT License [see LICENSE for details]
-# Written by Yonglu Li, Xijie Huang
 # --------------------------------------------------------
 
 """
@@ -372,21 +371,6 @@ def Get_next_sp_with_pose(human_box, object_box, human_pose, num_joints=17):
 
 ##############################################################################
 ##############################################################################
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-##############################################################################
 ##############################################################################
 ##############################################################################
 ##############################################################################
@@ -396,8 +380,6 @@ def Get_next_sp_with_pose(human_box, object_box, human_pose, num_joints=17):
 ##############################################################################
 ##############################################################################
 
-
-# for vcoco
 def Get_Next_Instance_HO_Neg(trainval_GT, Trainval_Neg, iter, Pos_augment, Neg_select, Data_length):
 
     GT       = trainval_GT[iter%Data_length]
@@ -521,7 +503,6 @@ def Get_Next_Instance_HO_spNeg(trainval_GT, Trainval_Neg, iter, Pos_augment, Neg
     im_shape = im_orig.shape
     im_orig  = im_orig.reshape(1, im_shape[0], im_shape[1], 3)
 
-
     Pattern, Human_augmented_sp, Human_augmented, Object_augmented, action_sp, action_HO, action_H, mask_sp, mask_HO, mask_H, binary_label = Augmented_HO_spNeg(GT, Trainval_Neg, im_shape, Pos_augment, Neg_select)
     
     blobs = {}
@@ -623,13 +604,8 @@ def Augmented_HO_spNeg(GT, Trainval_Neg, shape, Pos_augment, Neg_select):
     return Pattern, Human_augmented_sp, Human_augmented, Object_augmented, action_sp, action_HO, action_H, mask_sp, mask_HO, mask_H, binary_label
 
 
-
-
 ##############################################################################################################
-
 # for vcoco label with no_interaction (action_id = 30)
-
-
 
 def Get_Next_Instance_HO_Neg_30(trainval_GT, Trainval_Neg, iter, Pos_augment, Neg_select, Data_length):
 
@@ -665,7 +641,6 @@ def Augmented_HO_Neg_30(GT, Trainval_Neg, shape, Pos_augment, Neg_select):
     Human    = GT[2]
     Object   = GT[3]
     
-
     action_HO_ = Generate_action_30(GT[1])
     action_H_  = Generate_action_30(GT[4])
     mask_HO_   = np.asarray([1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,0,1,1,1,1,0,1,1]).reshape(1,30) # some actions do not have objects
@@ -675,14 +650,11 @@ def Augmented_HO_Neg_30(GT, Trainval_Neg, shape, Pos_augment, Neg_select):
     Object_augmented = Augmented_box(Object, shape, image_id, Pos_augment)
     Human_augmented_solo = Human_augmented.copy()
 
-
-
     Human_augmented  =  Human_augmented[:min(len(Human_augmented),len(Object_augmented))]
     Object_augmented = Object_augmented[:min(len(Human_augmented),len(Object_augmented))]
 
     num_pos = len(Human_augmented)
     
-
     if image_id in Trainval_Neg:
 
         if len(Trainval_Neg[image_id]) < Neg_select:
@@ -697,7 +669,6 @@ def Augmented_HO_Neg_30(GT, Trainval_Neg, shape, Pos_augment, Neg_select):
                 Object_augmented = np.concatenate((Object_augmented, np.array([0, Neg[3][0], Neg[3][1], Neg[3][2], Neg[3][3]]).reshape(1,5)), axis=0)
 
     num_pos_neg = len(Human_augmented)
-
 
     action_HO = action_HO_
     action_H  = action_H_
@@ -720,7 +691,6 @@ def Augmented_HO_Neg_30(GT, Trainval_Neg, shape, Pos_augment, Neg_select):
         Pattern_ = Get_next_sp(Human_augmented[i][1:], Object_augmented[i][1:]).reshape(1, 64, 64, 2)
         Pattern  = np.concatenate((Pattern, Pattern_), axis=0)
 
-
     Pattern           = Pattern.reshape( num_pos_neg, 64, 64, 2) 
     Human_augmented   = Human_augmented.reshape( num_pos_neg, 5) 
     Human_augmented_solo = Human_augmented_solo.reshape( -1, 5) 
@@ -740,8 +710,6 @@ def Augmented_HO_Neg_30(GT, Trainval_Neg, shape, Pos_augment, Neg_select):
     return Pattern, Human_augmented, Human_augmented_solo, Object_augmented, action_HO, action_H, mask_HO, mask_H, binary_label
 
 
-
-
 def Get_Next_Instance_HO_spNeg_30(trainval_GT, Trainval_Neg, iter, Pos_augment, Neg_select, Data_length):
 
     GT       = trainval_GT[iter%Data_length]
@@ -752,7 +720,6 @@ def Get_Next_Instance_HO_spNeg_30(trainval_GT, Trainval_Neg, iter, Pos_augment, 
     im_orig -= config.cfg.PIXEL_MEANS
     im_shape = im_orig.shape
     im_orig  = im_orig.reshape(1, im_shape[0], im_shape[1], 3)
-
 
     Pattern, Human_augmented_sp, Human_augmented, Object_augmented, action_sp, action_HO, action_H, mask_sp, mask_HO, mask_H, binary_label = Augmented_HO_spNeg_30(GT, Trainval_Neg, im_shape, Pos_augment, Neg_select)
     
@@ -854,23 +821,10 @@ def Augmented_HO_spNeg_30(GT, Trainval_Neg, shape, Pos_augment, Neg_select):
 
     return Pattern, Human_augmented_sp, Human_augmented, Object_augmented, action_sp, action_HO, action_H, mask_sp, mask_HO, mask_H, binary_label
 
-
-
-
-
-
-
-
-
 ##############################################################################
 ##############################################################################
 # for vcoco with pose vector
 ##############################################################################
-##############################################################################
-
-
-
-
 ##############################################################################
 
 def Get_Next_Instance_HO_Neg_pose_vector(trainval_GT, Trainval_Neg, iter, Pos_augment, Neg_select, Data_length):
@@ -1127,9 +1081,6 @@ def Augmented_HO_spNeg_pose_vector(GT, Trainval_Neg, shape, Pos_augment, Neg_sel
         binary_label[i][1] = 1 # neg is at 1
 
     return Pattern, Human_augmented_sp, Human_augmented, Object_augmented, action_sp, action_HO, action_H, mask_sp, mask_HO, mask_H, binary_label, pose
-
-
-
 
 ##############################################################################################################
 
@@ -1393,24 +1344,10 @@ def Augmented_HO_spNeg_30_pose_vector(GT, Trainval_Neg, shape, Pos_augment, Neg_
     return Pattern, Human_augmented_sp, Human_augmented, Object_augmented, action_sp, action_HO, action_H, mask_sp, mask_HO, mask_H, binary_label, pose
 
 
-
-
-
-
-
-
-
-
-
 ##############################################################################
 ##############################################################################
-# for vcoco with pose pattern
+# for vcoco with pose map
 ##############################################################################
-##############################################################################
-
-
-
-
 ##############################################################################
 
 def Get_Next_Instance_HO_Neg_pose_pattern(trainval_GT, Trainval_Neg, iter, Pos_augment, Neg_select, Data_length):
@@ -1875,19 +1812,6 @@ def Augmented_HO_spNeg_30_pose_pattern(GT, Trainval_Neg, shape, Pos_augment, Neg
     return Pattern, Human_augmented_sp, Human_augmented, Object_augmented, action_sp, action_HO, action_H, mask_sp, mask_HO, mask_H, binary_label
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 ####################################################################################################
 ####################################################################################################
 ####################################################################################################
@@ -1897,9 +1821,6 @@ def Augmented_HO_spNeg_30_pose_pattern(GT, Trainval_Neg, shape, Pos_augment, Neg
 ####################################################################################################
 ####################################################################################################
 ####################################################################################################
-
-
-
 
 def Get_Next_Instance_HO_Neg_HICO(trainval_GT, Trainval_Neg, iter, Pos_augment, Neg_select, Data_length):
 
@@ -1922,13 +1843,6 @@ def Get_Next_Instance_HO_Neg_HICO(trainval_GT, Trainval_Neg, iter, Pos_augment, 
     blobs['sp']          = Pattern
     blobs['H_num']       = num_pos
     blobs['binary_label'] = binary_label
-
-    # f = open('test.txt','w')
-    # f.write(str(num_pos))
-    # f.write('\n')
-    # f.write(str(len(Pattern)))
-    # f.write('\n')
-    # f.close()
 
     return blobs
 
@@ -1989,9 +1903,6 @@ def Augmented_HO_Neg_HICO(GT, Trainval_Neg, shape, Pos_augment, Neg_select):
     for i in range(num_pos + 1, num_pos_neg):
         binary_label[i][1] = 1 # neg is at 1
 
-    # different choice: 1. 600--1 0, no label no-inter--0 1; 2. 520--1 0, 80 and no label no-inter--0 1
-    # now which do we choose??? the first?
-
     f = open('test.txt','w')
     f.write(str(num_pos))
     f.write('\n')
@@ -2002,15 +1913,11 @@ def Augmented_HO_Neg_HICO(GT, Trainval_Neg, shape, Pos_augment, Neg_select):
     return Pattern, Human_augmented, Object_augmented, action_HO, num_pos, binary_label
 
 
-
-
-
 ########################################################################################################
 ########################################################################################################
 # for hico 520-80
 ########################################################################################################
 ########################################################################################################
-
 
 def Get_Next_Instance_HO_Neg_HICO_520(trainval_GT, Trainval_Neg, iter, Pos_augment, Neg_select, Data_length):
 
@@ -2124,12 +2031,6 @@ def Augmented_HO_Neg_HICO_520(GT, Trainval_Neg, shape, Pos_augment, Neg_select):
     return Pattern, Human_augmented, Object_augmented, action_HO, num_pos, binary_label
 
 
-
-
-
-
-
-
 ##############################################################################
 ##############################################################################
 ##############################################################################
@@ -2137,8 +2038,6 @@ def Augmented_HO_Neg_HICO_520(GT, Trainval_Neg, shape, Pos_augment, Neg_select):
 ##############################################################################
 ##############################################################################
 ##############################################################################
-
-
 
 def Get_Next_Instance_HO_Neg_HICO_pose_vector(trainval_GT, Trainval_Neg, iter, Pos_augment, Neg_select, Data_length):
 
@@ -2162,13 +2061,6 @@ def Get_Next_Instance_HO_Neg_HICO_pose_vector(trainval_GT, Trainval_Neg, iter, P
     blobs['H_num']       = num_pos
     blobs['binary_label'] = binary_label
     blobs['H_pose']      = pose
-
-    # f = open('test.txt','w')
-    # f.write(str(num_pos))
-    # f.write('\n')
-    # f.write(str(len(Pattern)))
-    # f.write('\n')
-    # f.close()
 
     return blobs
 
@@ -2246,9 +2138,6 @@ def Augmented_HO_Neg_HICO_pose_vector(GT, Trainval_Neg, shape, Pos_augment, Neg_
     for i in range(num_pos + 1, num_pos_neg):
         binary_label[i][1] = 1 # neg is at 1
 
-    # different choice: 1. 600--1 0, no label no-inter--0 1; 2. 520--1 0, 80 and no label no-inter--0 1
-    # now which do we choose??? the first?
-
     f = open('test.txt','w')
     f.write(str(num_pos))
     f.write('\n')
@@ -2259,15 +2148,11 @@ def Augmented_HO_Neg_HICO_pose_vector(GT, Trainval_Neg, shape, Pos_augment, Neg_
     return Pattern, Human_augmented, Object_augmented, action_HO, num_pos, binary_label, pose
 
 
-
-
-
 ########################################################################################################
 ########################################################################################################
 # for hico 520-80
 ########################################################################################################
 ########################################################################################################
-
 
 def Get_Next_Instance_HO_Neg_HICO_520_pose_vector(trainval_GT, Trainval_Neg, iter, Pos_augment, Neg_select, Data_length):
 
@@ -2399,9 +2284,6 @@ def Augmented_HO_Neg_HICO_520_pose_vector(GT, Trainval_Neg, shape, Pos_augment, 
     return Pattern, Human_augmented, Object_augmented, action_HO, num_pos, binary_label, pose
 
 
-
-
-
 ##############################################################################
 ##############################################################################
 ##############################################################################
@@ -2409,8 +2291,6 @@ def Augmented_HO_Neg_HICO_520_pose_vector(GT, Trainval_Neg, shape, Pos_augment, 
 ##############################################################################
 ##############################################################################
 ##############################################################################
-
-
 
 def Get_Next_Instance_HO_Neg_HICO_pose_pattern(trainval_GT, Trainval_Neg, iter, Pos_augment, Neg_select, Data_length):
 
@@ -2433,13 +2313,6 @@ def Get_Next_Instance_HO_Neg_HICO_pose_pattern(trainval_GT, Trainval_Neg, iter, 
     blobs['sp']          = Pattern
     blobs['H_num']       = num_pos
     blobs['binary_label'] = binary_label
-
-    # f = open('test.txt','w')
-    # f.write(str(num_pos))
-    # f.write('\n')
-    # f.write(str(len(Pattern)))
-    # f.write('\n')
-    # f.close()
 
     return blobs
 
@@ -2503,9 +2376,6 @@ def Augmented_HO_Neg_HICO_pose_pattern(GT, Trainval_Neg, shape, Pos_augment, Neg
     for i in range(num_pos + 1, num_pos_neg):
         binary_label[i][1] = 1 # neg is at 1
 
-    # different choice: 1. 600--1 0, no label no-inter--0 1; 2. 520--1 0, 80 and no label no-inter--0 1
-    # now which do we choose??? the first?
-
     f = open('test.txt','w')
     f.write(str(num_pos))
     f.write('\n')
@@ -2516,13 +2386,11 @@ def Augmented_HO_Neg_HICO_pose_pattern(GT, Trainval_Neg, shape, Pos_augment, Neg
     return Pattern, Human_augmented, Object_augmented, action_HO, num_pos, binary_label
 
 
-
 ########################################################################################################
 ########################################################################################################
 # for hico 520-80
 ########################################################################################################
 ########################################################################################################
-
 
 def Get_Next_Instance_HO_Neg_HICO_520_pose_pattern(trainval_GT, Trainval_Neg, iter, Pos_augment, Neg_select, Data_length):
 
@@ -2638,65 +2506,6 @@ def Augmented_HO_Neg_HICO_520_pose_pattern(GT, Trainval_Neg, shape, Pos_augment,
 
     return Pattern, Human_augmented, Object_augmented, action_HO, num_pos, binary_label
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#######################################################################################################
-#######################################################################################################
-#######################################################################################################
-#######################################################################################################
-#######################################################################################################
-#######################################################################################################
-
-# For the use of more positive pairs (version2)
-
-#######################################################################################################
-########################################################################################################
-#######################################################################################################
-#######################################################################################################
-#######################################################################################################
-#######################################################################################################
-
-
-
-
-
-
-
-
-
-
 #######################################################################################################
 #######################################################################################################
 #######################################################################################################
@@ -2706,8 +2515,6 @@ def Augmented_HO_Neg_HICO_520_pose_pattern(GT, Trainval_Neg, shape, Pos_augment,
 #######################################################################################################
 #######################################################################################################
 #######################################################################################################
-
-
 
 def Get_Next_Instance_HO_Neg_version2(trainval_GT, Trainval_Neg, iter, Pos_augment, Neg_select, Data_length):
 
@@ -2867,34 +2674,6 @@ def Augmented_HO_Neg_version2(GT, Trainval_Neg, shape, Pos_augment, Neg_select):
     return Pattern, Human_augmented, Human_augmented_solo, Object_augmented, action_HO, action_H, mask_HO, mask_H, binary_label
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def Get_Next_Instance_HO_Neg_version2_for_hico_520(trainval_GT, Trainval_Neg, iter, Pos_augment, Neg_select, Data_length):
 
     GT       = trainval_GT[iter%Data_length]
@@ -3034,33 +2813,6 @@ def Augmented_HO_Neg_version2_for_hico_520(GT, Trainval_Neg, shape, Pos_augment,
         binary_label[i][1] = 1
 
     return Pattern, Human_augmented, Human_augmented_solo, Object_augmented, action_HO, binary_label, num_pos
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 # for vcoco
@@ -3234,14 +2986,11 @@ def Augmented_HO_spNeg_version2(GT, Trainval_Neg, shape, Pos_augment, Neg_select
     return Pattern, Human_augmented_sp, Human_augmented, Object_augmented, action_sp, action_HO, action_H, mask_sp, mask_HO, mask_H, binary_label
 
 
-
-
 ##############################################################################################################
 ##############################################################################################################
 # for vcoco label with no_interaction (action_id = 30)
 ##############################################################################################################
 ##############################################################################################################
-
 
 def Get_Next_Instance_HO_Neg_30_version2(trainval_GT, Trainval_Neg, iter, Pos_augment, Neg_select, Data_length):
 
@@ -3569,33 +3318,10 @@ def Augmented_HO_spNeg_30_version2(GT, Trainval_Neg, shape, Pos_augment, Neg_sel
     return Pattern, Human_augmented_sp, Human_augmented, Object_augmented, action_sp, action_HO, action_H, mask_sp, mask_HO, mask_H, binary_label
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ##############################################################################
 ##############################################################################
 # for vcoco with pose vector
 ##############################################################################
-##############################################################################
-
-
-
-
 ##############################################################################
 
 def Get_Next_Instance_HO_Neg_pose_vector_version2(trainval_GT, Trainval_Neg, iter, Pos_augment, Neg_select, Data_length):
@@ -4709,14 +4435,6 @@ def Augmented_HO_spNeg_pose_pattern_version2(GT, Trainval_Neg, shape, Pos_augmen
     return Pattern, Human_augmented_sp, Human_augmented, Object_augmented, action_sp, action_HO, action_H, mask_sp, mask_HO, mask_H, binary_label
 
 
-
-
-
-
-
-
-
-
 def Get_Next_Instance_HO_spNeg_pose_pattern_mask_version2(trainval_GT, Trainval_Neg, iter, Pos_augment, Neg_select, Data_length):
 
     GT       = trainval_GT[iter%Data_length]
@@ -4902,15 +4620,6 @@ def Augmented_HO_spNeg_pose_pattern_mask_version2(GT, Trainval_Neg, shape, Pos_a
         binary_label[i][1] = 1 # neg is at 1
 
     return Pattern, Human_augmented_sp, Human_augmented, Object_augmented, action_sp, action_HO, action_H, mask_sp, mask_HO, mask_H, binary_label, mask_object
-
-
-
-
-
-
-
-
-
 
 
 def reverse(mask, alpha, beta): # alpha = 10, beta = 1
@@ -5291,17 +5000,6 @@ def Augmented_HO_spNeg_pose_pattern_negfull_version2(GT, Trainval_Neg, shape, Po
     return Pattern, Human_augmented_sp, Human_augmented, Object_augmented, action_sp, action_HO, action_H, mask_sp, mask_HO, mask_H, binary_label
 
 
-
-
-
-
-
-
-
-
-
-
-
 ##############################################################################################################
 
 '''
@@ -5639,22 +5337,6 @@ def Augmented_HO_spNeg_30_pose_pattern_version2(GT, Trainval_Neg, shape, Pos_aug
     return Pattern, Human_augmented_sp, Human_augmented, Object_augmented, action_sp, action_HO, action_H, mask_sp, mask_HO, mask_H, binary_label
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #######################################################################################################
 #######################################################################################################
 #######################################################################################################
@@ -5664,7 +5346,6 @@ def Augmented_HO_spNeg_30_pose_pattern_version2(GT, Trainval_Neg, shape, Pos_aug
 #######################################################################################################
 #######################################################################################################
 #######################################################################################################
-
 
 def Get_Next_Instance_HO_Neg_HICO_version2(trainval_GT, Trainval_Neg, iter, Pos_augment, Neg_select, Data_length):
 
@@ -5926,9 +5607,6 @@ def Augmented_HO_Neg_HICO_520_version2(GT, Trainval_Neg, shape, Pos_augment, Neg
     return Pattern, Human_augmented, Object_augmented, action_HO, num_pos, binary_label
 
 
-
-
-
 ##############################################################################
 ##############################################################################
 ##############################################################################
@@ -5936,8 +5614,6 @@ def Augmented_HO_Neg_HICO_520_version2(GT, Trainval_Neg, shape, Pos_augment, Neg
 ##############################################################################
 ##############################################################################
 ##############################################################################
-
-
 
 def Get_Next_Instance_HO_Neg_HICO_pose_vector_version2(trainval_GT, Trainval_Neg, iter, Pos_augment, Neg_select, Data_length):
 
@@ -5961,13 +5637,6 @@ def Get_Next_Instance_HO_Neg_HICO_pose_vector_version2(trainval_GT, Trainval_Neg
     blobs['H_num']       = num_pos
     blobs['binary_label'] = binary_label
     blobs['H_pose']      = pose
-
-    # f = open('test.txt','w')
-    # f.write(str(num_pos))
-    # f.write('\n')
-    # f.write(str(len(Pattern)))
-    # f.write('\n')
-    # f.close()
 
     return blobs
 
@@ -6087,9 +5756,6 @@ def Augmented_HO_Neg_HICO_pose_vector_version2(GT, Trainval_Neg, shape, Pos_augm
     for i in range(num_pos + 1, num_pos_neg):
         binary_label[i][1] = 1 # neg is at 1
 
-    # different choice: 1. 600--1 0, no label no-inter--0 1; 2. 520--1 0, 80 and no label no-inter--0 1
-    # now which do we choose??? the first?
-
     f = open('test.txt','w')
     f.write(str(num_pos))
     f.write('\n')
@@ -6100,15 +5766,11 @@ def Augmented_HO_Neg_HICO_pose_vector_version2(GT, Trainval_Neg, shape, Pos_augm
     return Pattern, Human_augmented, Object_augmented, action_HO, num_pos, binary_label, pose
 
 
-
-
-
 ########################################################################################################
 ########################################################################################################
 # for hico 520-80
 ########################################################################################################
 ########################################################################################################
-
 
 def Get_Next_Instance_HO_Neg_HICO_520_pose_vector_version2(trainval_GT, Trainval_Neg, iter, Pos_augment, Neg_select, Data_length):
 
@@ -6282,20 +5944,13 @@ def Augmented_HO_Neg_HICO_520_pose_vector_version2(GT, Trainval_Neg, shape, Pos_
     return Pattern, Human_augmented, Object_augmented, action_HO, num_pos, binary_label, pose
 
 
-
-
-
-
-
 ##############################################################################
 ##############################################################################
 ##############################################################################
-# for hico with pose pattern
+# for hico with pose map
 ##############################################################################
 ##############################################################################
 ##############################################################################
-
-
 
 def Get_Next_Instance_HO_Neg_HICO_pose_pattern_version2(trainval_GT, Trainval_Neg, iter, Pos_augment, Neg_select, Data_length):
 
@@ -6318,13 +5973,6 @@ def Get_Next_Instance_HO_Neg_HICO_pose_pattern_version2(trainval_GT, Trainval_Ne
     blobs['sp']          = Pattern
     blobs['H_num']       = num_pos
     blobs['binary_label'] = binary_label
-
-    # f = open('test.txt','w')
-    # f.write(str(num_pos))
-    # f.write('\n')
-    # f.write(str(len(Pattern)))
-    # f.write('\n')
-    # f.close()
 
     return blobs
 
@@ -6423,25 +6071,7 @@ def Augmented_HO_Neg_HICO_pose_pattern_version2(GT, Trainval_Neg, shape, Pos_aug
     for i in range(num_pos + 1, num_pos_neg):
         binary_label[i][1] = 1 # neg is at 1
 
-    # different choice: 1. 600--1 0, no label no-inter--0 1; 2. 520--1 0, 80 and no label no-inter--0 1
-    # now which do we choose??? the first?
-
-    # f = open('test.txt','w')
-    # f.write(str(num_pos))
-    # f.write('\n')
-    # f.write(str(num_pos_neg))
-    # f.write('\n')
-    # f.close()
-
     return Pattern, Human_augmented, Object_augmented, action_HO, num_pos, binary_label
-
-
-
-
-
-
-
-
 
 def Get_Next_Instance_HO_Neg_HICO_pose_pattern_version2_for_classification(trainval_GT, Trainval_Neg, image_id, Pos_augment, Neg_select):
 
@@ -6543,24 +6173,11 @@ def Augmented_HO_Neg_HICO_pose_pattern_version2_for_classification(image_id, tra
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 ########################################################################################################
 ########################################################################################################
 # for hico 520-80
 ########################################################################################################
 ########################################################################################################
-
 
 def Get_Next_Instance_HO_Neg_HICO_520_pose_pattern_version2(trainval_GT, Trainval_Neg, iter, Pos_augment, Neg_select, Data_length):
 
@@ -6713,18 +6330,6 @@ def Augmented_HO_Neg_HICO_520_pose_pattern_version2(GT, Trainval_Neg, shape, Pos
     return Pattern, Human_augmented, Object_augmented, action_HO, num_pos, binary_label
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 #############################################################################################################
 # hico vcoco combine training
 #############################################################################################################
@@ -6864,12 +6469,6 @@ def Augmented_HO_Neg_HICO_520_80_VCOCO_Early_combine_version2(GT, Trainval_Neg, 
         binary_label[i][1] = 1 # neg is at 1
 
     return Pattern, Human_augmented, Object_augmented, binary_label, num_pos
-
-
-
-
-
-
 
 
 #############################################################################################################
@@ -7018,15 +6617,6 @@ def Augmented_HO_Neg_HCVRD_HICO_520_80_VCOCO_Early_combine_version2(GT, Trainval
     return Pattern, Human_augmented, Object_augmented, binary_label, num_pos
 
 
-
-
-
-
-
-
-
-
-
 #############################################################################################################
 # openimage hcvrd hico vcoco combine training
 #############################################################################################################
@@ -7173,10 +6763,6 @@ def Augmented_HO_Neg_OPENIMAGE_HCVRD_HICO_520_80_VCOCO_Early_combine_version2(GT
         binary_label[i][1] = 1 # neg is at 1
 
     return Pattern, Human_augmented, Object_augmented, binary_label, num_pos
-
-
-
-
 
 
 
@@ -7336,183 +6922,6 @@ def Augmented_HO_Neg_OPENIMAGE_HCVRD_HICO_520_80_VCOCO_Early_combine_pose_patter
 
     return Pattern, Human_augmented, Object_augmented, binary_label, num_pos
 
-
-
-
-
-
-
-
-
-
-
-#############################################################################################################
-# VTRANSE D training
-#############################################################################################################
-def Get_Next_Instance_HO_Neg_VTRANSE_version2(trainval_GT, Trainval_Neg, iter, Pos_augment, Neg_select, Data_length):
-
-    GT       = trainval_GT[iter%Data_length]
-    dataset = GT[len(GT) - 1]
-    image_id = GT[0][0]
-    if dataset == 'VTRANSE':
-        im_file = '/Disk1/yonglu/vtranse/dataset/VG/images/VG_100K/' + image_id
-    else:
-        return
-
-    im       = cv2.imread(im_file)
-    im_orig  = im.astype(np.float32, copy=True)
-    im_orig -= config.cfg.PIXEL_MEANS
-    im_shape = im_orig.shape
-    im_orig  = im_orig.reshape(1, im_shape[0], im_shape[1], 3)
-
-    Pattern, Human_augmented, Object_augmented, binary_label, H_num = Augmented_HO_Neg_VTRANSE_version2(GT, Trainval_Neg, im_shape, Pos_augment, Neg_select)
-
-    blobs = {}
-    blobs['image']       = im_orig
-    blobs['H_boxes']     = Human_augmented
-    blobs['O_boxes']     = Object_augmented
-    blobs['sp']          = Pattern
-    blobs['H_num']       = H_num
-    blobs['binary_label'] = binary_label
-
-    return blobs
-
-def Augmented_HO_Neg_VTRANSE_version2(GT, Trainval_Neg, shape, Pos_augment, Neg_select):
-    dataset = GT[len(GT) - 1]
-    image_id = GT[0][0]
-    key = dataset + '_' + image_id
-
-    #############################################################################
-    GT_count = len(GT) - 1
-    aug_all = int(Pos_augment / GT_count)
-    aug_last = Pos_augment - aug_all * (GT_count - 1) 
-    
-    Human_augmented, Object_augmented, action_HO = [], [], []
-
-    for i in range(GT_count - 1):
-        Human    = GT[i][2]
-        Object   = GT[i][3]
-
-        Human_augmented_temp  = Augmented_box(Human,  shape, image_id, aug_all)
-        Object_augmented_temp = Augmented_box(Object, shape, image_id, aug_all)
-
-        length_min = min(len(Human_augmented_temp),len(Object_augmented_temp))
-
-        Human_augmented_temp  =  Human_augmented_temp[:length_min]
-        Object_augmented_temp = Object_augmented_temp[:length_min]
-
-        action_HO__temp = Generate_action_HICO(GT[i][1])
-        action_HO_temp  = action_HO__temp
-        for j in range(length_min - 1):
-            action_HO_temp = np.concatenate((action_HO_temp, action_HO__temp), axis=0)
-    
-        Human_augmented.extend(Human_augmented_temp)
-        Object_augmented.extend(Object_augmented_temp)
-        action_HO.extend(action_HO_temp)
-
-    Human    = GT[GT_count - 1][2]
-    Object   = GT[GT_count - 1][3]
-
-    Human_augmented_temp  = Augmented_box(Human,  shape, image_id, aug_last)
-    Object_augmented_temp = Augmented_box(Object, shape, image_id, aug_last)
-
-    length_min = min(len(Human_augmented_temp),len(Object_augmented_temp))
-
-    Human_augmented_temp  =  Human_augmented_temp[:length_min]
-    Object_augmented_temp = Object_augmented_temp[:length_min]
-
-    action_HO__temp = Generate_action_HICO(GT[GT_count - 1][1])
-    action_HO_temp  = action_HO__temp
-    for j in range(length_min - 1):
-        action_HO_temp = np.concatenate((action_HO_temp, action_HO__temp), axis=0)
-
-    Human_augmented.extend(Human_augmented_temp)
-    Object_augmented.extend(Object_augmented_temp)
-    action_HO.extend(action_HO_temp)
-    #######################################################################################
-    
-    num_pos = len(Human_augmented)
-    Human_augmented   = np.array(Human_augmented, dtype = 'float32')
-    Object_augmented  = np.array(Object_augmented, dtype = 'float32')
-
-    if key in Trainval_Neg:
-
-        if len(Trainval_Neg[key]) < Neg_select:
-            for Neg in Trainval_Neg[key]:
-                Human_augmented  = np.concatenate((Human_augmented,  np.array([0, Neg[2][0], Neg[2][1], Neg[2][2], Neg[2][3]]).reshape(1,5)), axis=0)
-                Object_augmented = np.concatenate((Object_augmented, np.array([0, Neg[3][0], Neg[3][1], Neg[3][2], Neg[3][3]]).reshape(1,5)), axis=0)
-        else:
-            List = random.sample(range(len(Trainval_Neg[key])), len(Trainval_Neg[key]))
-            for i in range(Neg_select):
-                Neg = Trainval_Neg[key][List[i]]
-                Human_augmented  = np.concatenate((Human_augmented,  np.array([0, Neg[2][0], Neg[2][1], Neg[2][2], Neg[2][3]]).reshape(1,5)), axis=0)
-                Object_augmented = np.concatenate((Object_augmented, np.array([0, Neg[3][0], Neg[3][1], Neg[3][2], Neg[3][3]]).reshape(1,5)), axis=0)
-
-    num_pos_neg = len(Human_augmented)
-
-    Pattern   = np.empty((0, 64, 64, 2), dtype=np.float32)
-
-    for i in range(num_pos_neg):
-        Pattern_ = Get_next_sp(Human_augmented[i][1:], Object_augmented[i][1:]).reshape(1, 64, 64, 2)
-        Pattern  = np.concatenate((Pattern, Pattern_), axis=0)
-    
-    Pattern           = Pattern.reshape( num_pos_neg, 64, 64, 2) 
-    Human_augmented   = Human_augmented.reshape( num_pos_neg, 5) 
-    Object_augmented  = Object_augmented.reshape(num_pos_neg, 5) 
-
-    # binary label for vcoco, different from hico, vcoco does not have the no-interaction label, so give it binary label accord to the locations of pos and neg directly
-    binary_label = np.zeros((num_pos_neg, 2), dtype = 'int32')
-
-    for i in range(num_pos):
-        binary_label[i][0] = 1 # pos is at 0
-
-    for i in range(num_pos + 1, num_pos_neg):
-        binary_label[i][1] = 1 # neg is at 1
-
-    return Pattern, Human_augmented, Object_augmented, binary_label, num_pos
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#######################################################################################################
-#######################################################################################################
-#######################################################################################################
-#######################################################################################################
-#######################################################################################################
-#######################################################################################################
-
-# For the use of repeat gt and more neg pairs (version3)
-
-#######################################################################################################
-########################################################################################################
-#######################################################################################################
-#######################################################################################################
-#######################################################################################################
-#######################################################################################################
-
-
-
-
-
-
-
-
-
-
 #######################################################################################################
 #######################################################################################################
 #######################################################################################################
@@ -7522,8 +6931,6 @@ def Augmented_HO_Neg_VTRANSE_version2(GT, Trainval_Neg, shape, Pos_augment, Neg_
 #######################################################################################################
 #######################################################################################################
 #######################################################################################################
-
-
 
 def Get_Next_Instance_HO_Neg_version3(trainval_GT, Trainval_Neg, iter, Pos_augment, Neg_select, Data_length):
 
@@ -7685,7 +7092,6 @@ def Augmented_HO_Neg_version3(GT, Trainval_Neg, shape, Pos_augment, Neg_select):
         binary_label[i][1] = 1 # neg is at 1
 
     return Pattern, Human_augmented, Human_augmented_solo, Object_augmented, action_HO, action_H, mask_HO, mask_H, binary_label
-
 
 
 # for vcoco
@@ -7863,22 +7269,6 @@ def Augmented_HO_spNeg_version3(GT, Trainval_Neg, shape, Pos_augment, Neg_select
     return Pattern, Human_augmented_sp, Human_augmented, Object_augmented, action_sp, action_HO, action_H, mask_sp, mask_HO, mask_H, binary_label
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ##############################################################################
 ##############################################################################
 ##############################################################################
@@ -7886,8 +7276,6 @@ def Augmented_HO_spNeg_version3(GT, Trainval_Neg, shape, Pos_augment, Neg_select
 ##############################################################################
 ##############################################################################
 ##############################################################################
-
-
 
 def Get_Next_Instance_HO_Neg_HICO_pose_vector_version3(trainval_GT, Trainval_Neg, iter, Pos_augment, Neg_select, Data_length):
 
@@ -7911,13 +7299,6 @@ def Get_Next_Instance_HO_Neg_HICO_pose_vector_version3(trainval_GT, Trainval_Neg
     blobs['H_num']       = num_pos
     blobs['binary_label'] = binary_label
     blobs['H_pose']      = pose
-
-    # f = open('test.txt','w')
-    # f.write(str(num_pos))
-    # f.write('\n')
-    # f.write(str(len(Pattern)))
-    # f.write('\n')
-    # f.close()
 
     return blobs
 
@@ -8040,472 +7421,4 @@ def Augmented_HO_Neg_HICO_pose_vector_version3(GT, Trainval_Neg, shape, Pos_augm
     for i in range(num_pos + 1, num_pos_neg):
         binary_label[i][1] = 1 # neg is at 1
 
-    # different choice: 1. 600--1 0, no label no-inter--0 1; 2. 520--1 0, 80 and no label no-inter--0 1
-    # now which do we choose??? the first?
-
-    # f = open('test.txt','w')
-    # f.write(str(num_pos))
-    # f.write('\n')
-    # f.write(str(num_pos_neg))
-    # f.write('\n')
-    # f.close()
-
     return Pattern, Human_augmented, Object_augmented, action_HO, num_pos, binary_label, pose
-
-
-
-
-##############################################################################
-##############################################################################
-##############################################################################
-# for hico det PVP TODO:
-##############################################################################
-##############################################################################
-##############################################################################
-
-def Generate_part_bbox(joint_bbox, Human_bbox=None):
-    part_bbox = np.zeros([1, 10, 5], dtype=np.float64)
-    if isinstance(joint_bbox, int):
-        if Human_bbox is None:
-            raise ValueError
-        for i in range(10):
-            part_bbox[0, i, :] = np.array([0, Human_bbox[0], Human_bbox[1], Human_bbox[2], Human_bbox[3]], dtype=np.float64)
-    
-    else:
-        for i in range(10):
-            part_bbox[0, i, :] = np.array([0, joint_bbox[i]['x1'],  joint_bbox[i]['y1'],  joint_bbox[i]['x2'],  joint_bbox[i]['y2']], dtype=np.float64)
-    
-    return part_bbox
-
-def Generate_action_PVP(idx, num_pvp):
-    action_PVP = np.zeros([1, num_pvp], dtype=np.float64)
-    if isinstance(idx, int):
-        action_PVP[:, idx] = 1
-    else:
-        action_PVP[:, list(idx)] = 1
-    return action_PVP
-
-def Get_Next_Instance_HO_Neg_HICO_pose_pattern_version2_for_PVP(Trainval_GT, Trainval_Neg, image_id, Pos_augment, Neg_select):
-
-    im_file = config.cfg.DATA_DIR + '/' + 'hico_20160224_det/images/train2015/HICO_train2015_' + (str(image_id)).zfill(8) + '.jpg'
-    im       = cv2.imread(im_file)
-    im_orig  = im.astype(np.float32, copy=True)
-    im_orig -= config.cfg.PIXEL_MEANS
-    im_shape = im_orig.shape
-    im_orig  = im_orig.reshape(1, im_shape[0], im_shape[1], 3)
-
-    Pattern, Human_augmented, Object_augmented, Part_bbox, action_HO, action_PVP0, action_PVP1, action_PVP2, action_PVP3, action_PVP4, action_PVP5, num_pos, binary_label, gt_10v, gt_verb = Augmented_HO_Neg_HICO_pose_pattern_version2_for_PVP(image_id, Trainval_GT, Trainval_Neg, Pos_augment, Neg_select)
-    
-    blobs = {}
-    blobs['image']       = im_orig
-    blobs['H_boxes']     = Human_augmented
-    blobs['O_boxes']     = Object_augmented
-    blobs['P_boxes']     = Part_bbox
-    blobs['gt_class_HO'] = action_HO
-    blobs['gt_class_P0'] = action_PVP0
-    blobs['gt_class_P1'] = action_PVP1
-    blobs['gt_class_P2'] = action_PVP2
-    blobs['gt_class_P3'] = action_PVP3
-    blobs['gt_class_P4'] = action_PVP4
-    blobs['gt_class_P5'] = action_PVP5
-    blobs['sp']          = Pattern
-    blobs['H_num']       = num_pos
-    blobs['binary_label'] = binary_label
-    blobs['gt_10v']      = gt_10v
-    blobs['gt_verb']     = gt_verb
-
-    return blobs
-
-def Augmented_HO_Neg_HICO_pose_pattern_version2_for_PVP(image_id, trainval_GT, Trainval_Neg, Pos_augment, Neg_select):
-    pair_info = trainval_GT[image_id]
-    pair_num = len(pair_info)
-
-    # if not sufficient, repeat data
-    if pair_num >= Pos_augment:
-        List = random.sample(range(pair_num), Pos_augment)
-        GT = []
-        for i in range(Pos_augment):
-            GT.append(pair_info[List[i]])
-    else:
-        GT = pair_info
-        for i in range(Pos_augment - pair_num):
-            index = random.randint(0, pair_num - 1)
-            GT.append(pair_info[index])
-
-    Human_augmented = np.empty((0, 5), dtype=np.float64)
-    Object_augmented = np.empty((0, 5), dtype=np.float64)
-    action_HO   = np.empty((0, 600), dtype=np.float64)
-    Pattern     = np.empty((0, 64, 64, 3), dtype=np.float64)
-    part_bbox   = np.empty((0, 10, 5), dtype=np.float64)
-    action_PVP0 = np.empty((0, 12), dtype=np.float64)
-    action_PVP1 = np.empty((0, 10), dtype=np.float64)
-    action_PVP2 = np.empty((0, 5), dtype=np.float64)
-    action_PVP3 = np.empty((0, 31), dtype=np.float64)
-    action_PVP4 = np.empty((0, 5), dtype=np.float64)
-    action_PVP5 = np.empty((0, 13), dtype=np.float64)
-    action_verb = np.empty((0, 117), dtype=np.float64)
-    gt_hp10     = np.empty((0, 10), dtype=np.float64)
-    # TODO:
-    for i in range(Pos_augment):
-        Human    = GT[i][2] # [x1, y1, x2, y2]
-        Object   = GT[i][3] # [x1, y1, x2, y2]
-        Human_augmented  = np.concatenate((Human_augmented, np.array([0, Human[0],  Human[1],  Human[2],  Human[3]]).reshape(1,5).astype(np.float64)), axis=0)
-        Object_augmented = np.concatenate((Object_augmented, np.array([0, Object[0],  Object[1],  Object[2],  Object[3]]).reshape(1,5).astype(np.float64)), axis=0)
-        action_HO        = np.concatenate((action_HO, Generate_action_HICO(GT[i][1])), axis=0)
-        Pattern          = np.concatenate((Pattern, Get_next_sp_with_pose(np.array(Human, dtype='float64'), np.array(Object, dtype='float64'), GT[i][4]['joints_16']).reshape(1, 64, 64, 3)), axis=0)
-        part_bbox        = np.concatenate((part_bbox, Generate_part_bbox(GT[i][4]['part_bbox'])), axis=0)
-        action_PVP0      = np.concatenate((action_PVP0, Generate_action_PVP(GT[i][4]['pvp76_ankle2'], 12)), axis=0) # ankle
-        action_PVP1      = np.concatenate((action_PVP1, Generate_action_PVP(GT[i][4]['pvp76_knee2'], 10)), axis=0) # knee
-        action_PVP2      = np.concatenate((action_PVP2, Generate_action_PVP(GT[i][4]['pvp76_hip'], 5)), axis=0) # hand
-        action_PVP3      = np.concatenate((action_PVP3, Generate_action_PVP(GT[i][4]['pvp76_hand2'], 31)), axis=0) # shoulder
-        action_PVP4      = np.concatenate((action_PVP4, Generate_action_PVP(GT[i][4]['pvp76_shoulder2'], 5)), axis=0) # hip
-        action_PVP5      = np.concatenate((action_PVP5, Generate_action_PVP(GT[i][4]['pvp76_head'], 13)), axis=0) # head
-        action_verb      = np.concatenate((action_verb, Generate_action_PVP(list(GT[i][4]['verb117_list']), 117)), axis=0)
-        gt_hp10          = np.concatenate((gt_hp10, Generate_action_PVP(GT[i][4]['hp10_list'], 10)), axis=0)
-    num_pos = Pos_augment
-    
-    if image_id in Trainval_Neg.keys():
-        if len(Trainval_Neg[image_id]) < Neg_select:
-            List = range(len(Trainval_Neg[image_id]))
-        else:
-            List = random.sample(range(len(Trainval_Neg[image_id])), len(Trainval_Neg[image_id]))
-
-        for i in range(len(List)):
-            Neg = Trainval_Neg[image_id][List[i]]
-            Human_augmented  = np.concatenate((Human_augmented,  np.array([0, Neg[2][0], Neg[2][1], Neg[2][2], Neg[2][3]]).reshape(1,5)), axis=0)
-            Object_augmented = np.concatenate((Object_augmented, np.array([0, Neg[3][0], Neg[3][1], Neg[3][2], Neg[3][3]]).reshape(1,5)), axis=0)
-            action_HO        = np.concatenate((action_HO, Generate_action_HICO([Neg[1]])), axis=0)
-            Pattern_ = Get_next_sp_with_pose(np.array(Neg[2], dtype='float64'), np.array(Neg[3], dtype='float64'), Neg[7]).reshape(1, 64, 64, 3)
-            Pattern  = np.concatenate((Pattern, Pattern_), axis=0)
-            # print('id, List[i]', image_id, List[i])
-            # print('Neg[8]', Neg[8])
-            # print('Neg[9]', Neg[9])
-            # print('Neg[-2]', Neg[-2])
-            # print('Neg[-1]', Neg[-1])
-            try:
-                part_bbox = np.concatenate((part_bbox, Generate_part_bbox(Neg[8], Neg[2])), axis=0)
-            except:
-                print('id, List[i]', image_id, List[i])
-                print('Neg[8]', Neg[8])
-                print('Neg[9]', Neg[9])
-                print('Neg[10]', Neg[10])
-                print('Neg[11]', Neg[11])
-                raise ValueError
-            action_verb      = np.concatenate((action_verb, Generate_action_PVP(Neg[-2], 117)), axis=0)
-            action_PVP0      = np.concatenate((action_PVP0, Generate_action_PVP(Neg[-1]['pvp76_ankle2'], 12)), axis=0) # ankle
-            action_PVP1      = np.concatenate((action_PVP1, Generate_action_PVP(Neg[-1]['pvp76_knee2'], 10)), axis=0) # knee
-            action_PVP2      = np.concatenate((action_PVP2, Generate_action_PVP(Neg[-1]['pvp76_hip'], 5)), axis=0) # hand
-            action_PVP3      = np.concatenate((action_PVP3, Generate_action_PVP(Neg[-1]['pvp76_hand2'], 31)), axis=0) # shoulder
-            action_PVP4      = np.concatenate((action_PVP4, Generate_action_PVP(Neg[-1]['pvp76_shoulder2'], 5)), axis=0) # hip
-            action_PVP5      = np.concatenate((action_PVP5, Generate_action_PVP(Neg[-1]['pvp76_head'], 13)), axis=0) # head
-            gt_hp10          = np.concatenate((gt_hp10, np.zeros([1, 10])), axis=0)
-
-    num_pos_neg = len(Human_augmented)
-
-    Pattern           = Pattern.reshape(num_pos_neg, 64, 64, 3) 
-    Human_augmented   = Human_augmented.reshape(num_pos_neg, 5) 
-    Object_augmented  = Object_augmented.reshape(num_pos_neg, 5) 
-    action_HO         = action_HO.reshape(num_pos_neg, 600) 
-
-    binary_label = np.zeros((num_pos_neg, 2), dtype='int64')
-    for i in range(num_pos):
-        # if hoi_id belong to 80 then is 0 1, else 1 0
-        binary_label[i][0] = 1 # pos is at 0 #############problem: here in pos, it contains the no interaction 80, so we may give this 80 '0 1' and 520 '1 0', and test
-    for i in range(num_pos + 1, num_pos_neg):
-        binary_label[i][1] = 1 # neg is at 1
-
-    return Pattern, Human_augmented, Object_augmented, part_bbox, action_HO, action_PVP0, action_PVP1, action_PVP2, action_PVP3, action_PVP4, action_PVP5, num_pos, binary_label, gt_hp10, action_verb
-
-
-########################################################################################################
-
-
-def Get_Next_Instance_HO_HICO_DET_for_only_PVP(Trainval_GT, Trainval_Neg, image_id, Pos_augment, Neg_select, pvp=76):
-
-    im_file = config.cfg.DATA_DIR + '/' + 'hico_20160224_det/images/train2015/HICO_train2015_' + (str(image_id)).zfill(8) + '.jpg'
-    im       = cv2.imread(im_file)
-    im_orig  = im.astype(np.float32, copy=True)
-    im_orig -= config.cfg.PIXEL_MEANS
-    im_shape = im_orig.shape
-    im_orig  = im_orig.reshape(1, im_shape[0], im_shape[1], 3)
-    if pvp == 76:
-        Human_augmented, Object_augmented, Part_bbox, action_HO, action_PVP0, action_PVP1, action_PVP2, action_PVP3, action_PVP4, action_PVP5, num_pos, binary_label, gt_10v, gt_verb = Augmented_HO_Neg_HICO_DET_for_only_PVP76(image_id, Trainval_GT, Trainval_Neg, Pos_augment, Neg_select)
-    else:
-        Human_augmented, Object_augmented, Part_bbox, action_HO, action_PVP0, action_PVP1, action_PVP2, action_PVP3, action_PVP4, action_PVP5, num_pos, binary_label, gt_10v, gt_verb = Augmented_HO_Neg_HICO_DET_for_only_PVP55(image_id, Trainval_GT, Trainval_Neg, Pos_augment, Neg_select)
-
-    blobs = {}
-    blobs['image']       = im_orig
-    blobs['H_boxes']     = Human_augmented
-    blobs['O_boxes']     = Object_augmented
-    blobs['P_boxes']     = Part_bbox
-    blobs['gt_class_HO'] = action_HO
-    blobs['gt_class_P0'] = action_PVP0
-    blobs['gt_class_P1'] = action_PVP1
-    blobs['gt_class_P2'] = action_PVP2
-    blobs['gt_class_P3'] = action_PVP3
-    blobs['gt_class_P4'] = action_PVP4
-    blobs['gt_class_P5'] = action_PVP5
-    blobs['H_num']       = num_pos
-    blobs['binary_label'] = binary_label
-    blobs['gt_10v']      = gt_10v
-    blobs['gt_verb']     = gt_verb
-
-    return blobs
-
-def Augmented_HO_Neg_HICO_DET_for_only_PVP76(image_id, trainval_GT, Trainval_Neg, Pos_augment, Neg_select):
-    pair_info = trainval_GT[image_id]
-    pair_num = len(pair_info)
-
-    # if not sufficient, repeat data
-    if pair_num >= Pos_augment:
-        List = random.sample(range(pair_num), Pos_augment)
-        GT = []
-        for i in range(Pos_augment):
-            GT.append(pair_info[List[i]])
-    else:
-        GT = pair_info
-        for i in range(Pos_augment - pair_num):
-            index = random.randint(0, pair_num - 1)
-            GT.append(pair_info[index])
-
-    Human_augmented = np.empty((0, 5), dtype=np.float64)
-    Object_augmented = np.empty((0, 5), dtype=np.float64)
-    action_HO   = np.empty((0, 600), dtype=np.float64)
-    part_bbox   = np.empty((0, 10, 5), dtype=np.float64)
-    action_PVP0 = np.empty((0, 12), dtype=np.float64)
-    action_PVP1 = np.empty((0, 10), dtype=np.float64)
-    action_PVP2 = np.empty((0, 5), dtype=np.float64)
-    action_PVP3 = np.empty((0, 31), dtype=np.float64)
-    action_PVP4 = np.empty((0, 5), dtype=np.float64)
-    action_PVP5 = np.empty((0, 13), dtype=np.float64)
-    action_verb = np.empty((0, 117), dtype=np.float64)
-    gt_hp10     = np.empty((0, 10), dtype=np.float64)
-    # TODO:
-    for i in range(Pos_augment):
-        Human    = GT[i][2] # [x1, y1, x2, y2]
-        Object   = GT[i][3] # [x1, y1, x2, y2]
-        Human_augmented  = np.concatenate((Human_augmented, np.array([0, Human[0],  Human[1],  Human[2],  Human[3]]).reshape(1,5).astype(np.float64)), axis=0)
-        Object_augmented = np.concatenate((Object_augmented, np.array([0, Object[0],  Object[1],  Object[2],  Object[3]]).reshape(1,5).astype(np.float64)), axis=0)
-        action_HO        = np.concatenate((action_HO, Generate_action_HICO(GT[i][1])), axis=0)
-        part_bbox        = np.concatenate((part_bbox, Generate_part_bbox(GT[i][4]['part_bbox'])), axis=0)
-        action_PVP0      = np.concatenate((action_PVP0, Generate_action_PVP(GT[i][4]['pvp76_ankle2'], 12)), axis=0) # ankle
-        action_PVP1      = np.concatenate((action_PVP1, Generate_action_PVP(GT[i][4]['pvp76_knee2'], 10)), axis=0) # knee
-        action_PVP2      = np.concatenate((action_PVP2, Generate_action_PVP(GT[i][4]['pvp76_hip'], 5)), axis=0) # hand
-        action_PVP3      = np.concatenate((action_PVP3, Generate_action_PVP(GT[i][4]['pvp76_hand2'], 31)), axis=0) # shoulder
-        action_PVP4      = np.concatenate((action_PVP4, Generate_action_PVP(GT[i][4]['pvp76_shoulder2'], 5)), axis=0) # hip
-        action_PVP5      = np.concatenate((action_PVP5, Generate_action_PVP(GT[i][4]['pvp76_head'], 13)), axis=0) # head
-        action_verb      = np.concatenate((action_verb, Generate_action_PVP(list(GT[i][4]['verb117_list']), 117)), axis=0)
-        gt_hp10          = np.concatenate((gt_hp10, Generate_action_PVP(GT[i][4]['hp10_list'], 10)), axis=0)
-    num_pos = Pos_augment
-    
-    if image_id in Trainval_Neg.keys():
-        if len(Trainval_Neg[image_id]) < Neg_select:
-            List = range(len(Trainval_Neg[image_id]))
-        else:
-            List = random.sample(range(len(Trainval_Neg[image_id])), len(Trainval_Neg[image_id]))
-
-        for i in range(len(List)):
-            Neg = Trainval_Neg[image_id][List[i]]
-            Human_augmented  = np.concatenate((Human_augmented,  np.array([0, Neg[2][0], Neg[2][1], Neg[2][2], Neg[2][3]]).reshape(1,5)), axis=0)
-            Object_augmented = np.concatenate((Object_augmented, np.array([0, Neg[3][0], Neg[3][1], Neg[3][2], Neg[3][3]]).reshape(1,5)), axis=0)
-            action_HO        = np.concatenate((action_HO, Generate_action_HICO([Neg[1]])), axis=0)
-            try:
-                part_bbox = np.concatenate((part_bbox, Generate_part_bbox(Neg[8], Neg[2])), axis=0)
-            except:
-                print('id, List[i]', image_id, List[i])
-                print('Neg[8]', Neg[8])
-                print('Neg[9]', Neg[9])
-                print('Neg[10]', Neg[10])
-                print('Neg[11]', Neg[11])
-                raise ValueError
-            action_verb      = np.concatenate((action_verb, Generate_action_PVP(Neg[-2], 117)), axis=0)
-            action_PVP0      = np.concatenate((action_PVP0, Generate_action_PVP(Neg[-1]['pvp76_ankle2'], 12)), axis=0) # ankle
-            action_PVP1      = np.concatenate((action_PVP1, Generate_action_PVP(Neg[-1]['pvp76_knee2'], 10)), axis=0) # knee
-            action_PVP2      = np.concatenate((action_PVP2, Generate_action_PVP(Neg[-1]['pvp76_hip'], 5)), axis=0) # hand
-            action_PVP3      = np.concatenate((action_PVP3, Generate_action_PVP(Neg[-1]['pvp76_hand2'], 31)), axis=0) # shoulder
-            action_PVP4      = np.concatenate((action_PVP4, Generate_action_PVP(Neg[-1]['pvp76_shoulder2'], 5)), axis=0) # hip
-            action_PVP5      = np.concatenate((action_PVP5, Generate_action_PVP(Neg[-1]['pvp76_head'], 13)), axis=0) # head
-            gt_hp10          = np.concatenate((gt_hp10, np.zeros([1, 10])), axis=0)
-
-    num_pos_neg = len(Human_augmented)
-
-    Human_augmented   = Human_augmented.reshape(num_pos_neg, 5) 
-    Object_augmented  = Object_augmented.reshape(num_pos_neg, 5) 
-    action_HO         = action_HO.reshape(num_pos_neg, 600) 
-
-    binary_label = np.zeros((num_pos_neg, 2), dtype='int64')
-    for i in range(num_pos):
-        # if hoi_id belong to 80 then is 0 1, else 1 0
-        binary_label[i][0] = 1 # pos is at 0 #############problem: here in pos, it contains the no interaction 80, so we may give this 80 '0 1' and 520 '1 0', and test
-    for i in range(num_pos + 1, num_pos_neg):
-        binary_label[i][1] = 1 # neg is at 1
-
-    return Human_augmented, Object_augmented, part_bbox, action_HO, action_PVP0, action_PVP1, action_PVP2, action_PVP3, action_PVP4, action_PVP5, num_pos, binary_label, gt_hp10, action_verb
-
-def Augmented_HO_Neg_HICO_DET_for_only_PVP55(image_id, trainval_GT, Trainval_Neg, Pos_augment, Neg_select):
-    pair_info = trainval_GT[image_id]
-    pair_num = len(pair_info)
-
-    # if not sufficient, repeat data
-    if pair_num >= Pos_augment:
-        List = random.sample(range(pair_num), Pos_augment)
-        GT = []
-        for i in range(Pos_augment):
-            GT.append(pair_info[List[i]])
-    else:
-        GT = pair_info
-        for i in range(Pos_augment - pair_num):
-            index = random.randint(0, pair_num - 1)
-            GT.append(pair_info[index])
-
-    Human_augmented = np.empty((0, 5), dtype=np.float64)
-    Object_augmented = np.empty((0, 5), dtype=np.float64)
-    action_HO   = np.empty((0, 600), dtype=np.float64)
-    part_bbox   = np.empty((0, 10, 5), dtype=np.float64)
-    action_PVP0 = np.empty((0, 6), dtype=np.float64)
-    action_PVP1 = np.empty((0, 6), dtype=np.float64)
-    action_PVP2 = np.empty((0, 3), dtype=np.float64)
-    action_PVP3 = np.empty((0, 23), dtype=np.float64)
-    action_PVP4 = np.empty((0, 5), dtype=np.float64)
-    action_PVP5 = np.empty((0, 12), dtype=np.float64)
-    action_verb = np.empty((0, 117), dtype=np.float64)
-    gt_hp10     = np.empty((0, 10), dtype=np.float64)
-    # TODO:
-    for i in range(Pos_augment):
-        Human    = GT[i][2] # [x1, y1, x2, y2]
-        Object   = GT[i][3] # [x1, y1, x2, y2]
-        Human_augmented  = np.concatenate((Human_augmented, np.array([0, Human[0],  Human[1],  Human[2],  Human[3]]).reshape(1,5).astype(np.float64)), axis=0)
-        Object_augmented = np.concatenate((Object_augmented, np.array([0, Object[0],  Object[1],  Object[2],  Object[3]]).reshape(1,5).astype(np.float64)), axis=0)
-        action_HO        = np.concatenate((action_HO, Generate_action_HICO(GT[i][1])), axis=0)
-        part_bbox        = np.concatenate((part_bbox, Generate_part_bbox(GT[i][4]['part_bbox'])), axis=0)
-        action_PVP0      = np.concatenate((action_PVP0, Generate_action_PVP(GT[i][4]['pvp55_ankle2'], 6)), axis=0) # ankle
-        action_PVP1      = np.concatenate((action_PVP1, Generate_action_PVP(GT[i][4]['pvp55_knee2'], 6)), axis=0) # knee
-        action_PVP2      = np.concatenate((action_PVP2, Generate_action_PVP(GT[i][4]['pvp55_hip'], 3)), axis=0) # hand
-        action_PVP3      = np.concatenate((action_PVP3, Generate_action_PVP(GT[i][4]['pvp55_hand2'], 23)), axis=0) # shoulder
-        action_PVP4      = np.concatenate((action_PVP4, Generate_action_PVP(GT[i][4]['pvp55_shoulder2'], 5)), axis=0) # hip
-        action_PVP5      = np.concatenate((action_PVP5, Generate_action_PVP(GT[i][4]['pvp55_head'], 12)), axis=0) # head
-        action_verb      = np.concatenate((action_verb, Generate_action_PVP(list(GT[i][4]['verb117_list']), 117)), axis=0)
-        gt_hp10          = np.concatenate((gt_hp10, Generate_action_PVP(GT[i][4]['hp10_list'], 10)), axis=0)
-    num_pos = Pos_augment
-    
-    if image_id in Trainval_Neg.keys():
-        if len(Trainval_Neg[image_id]) < Neg_select:
-            List = range(len(Trainval_Neg[image_id]))
-        else:
-            List = random.sample(range(len(Trainval_Neg[image_id])), len(Trainval_Neg[image_id]))
-
-        for i in range(len(List)):
-            Neg = Trainval_Neg[image_id][List[i]]
-            Human_augmented  = np.concatenate((Human_augmented,  np.array([0, Neg[2][0], Neg[2][1], Neg[2][2], Neg[2][3]]).reshape(1,5)), axis=0)
-            Object_augmented = np.concatenate((Object_augmented, np.array([0, Neg[3][0], Neg[3][1], Neg[3][2], Neg[3][3]]).reshape(1,5)), axis=0)
-            action_HO        = np.concatenate((action_HO, Generate_action_HICO([Neg[1]])), axis=0)
-            try:
-                part_bbox = np.concatenate((part_bbox, Generate_part_bbox(Neg[8], Neg[2])), axis=0)
-            except:
-                print('id, List[i]', image_id, List[i])
-                print('Neg[8]', Neg[8])
-                print('Neg[9]', Neg[9])
-                print('Neg[10]', Neg[10])
-                print('Neg[11]', Neg[11])
-                raise ValueError
-            action_verb      = np.concatenate((action_verb, Generate_action_PVP(Neg[-2], 117)), axis=0)
-            action_PVP0      = np.concatenate((action_PVP0, Generate_action_PVP(Neg[-1]['pvp55_ankle2'], 6)), axis=0) # ankle
-            action_PVP1      = np.concatenate((action_PVP1, Generate_action_PVP(Neg[-1]['pvp55_knee2'], 6)), axis=0) # knee
-            action_PVP2      = np.concatenate((action_PVP2, Generate_action_PVP(Neg[-1]['pvp55_hip'], 3)), axis=0) # hand
-            action_PVP3      = np.concatenate((action_PVP3, Generate_action_PVP(Neg[-1]['pvp55_hand2'], 23)), axis=0) # shoulder
-            action_PVP4      = np.concatenate((action_PVP4, Generate_action_PVP(Neg[-1]['pvp55_shoulder2'], 5)), axis=0) # hip
-            action_PVP5      = np.concatenate((action_PVP5, Generate_action_PVP(Neg[-1]['pvp55_head'], 12)), axis=0) # head
-            gt_hp10          = np.concatenate((gt_hp10, np.zeros([1, 10])), axis=0)
-
-    num_pos_neg = len(Human_augmented)
-
-    Human_augmented   = Human_augmented.reshape(num_pos_neg, 5) 
-    Object_augmented  = Object_augmented.reshape(num_pos_neg, 5) 
-    action_HO         = action_HO.reshape(num_pos_neg, 600) 
-
-    binary_label = np.zeros((num_pos_neg, 2), dtype='int64')
-    for i in range(num_pos):
-        # if hoi_id belong to 80 then is 0 1, else 1 0
-        binary_label[i][0] = 1 # pos is at 0 #############problem: here in pos, it contains the no interaction 80, so we may give this 80 '0 1' and 520 '1 0', and test
-    for i in range(num_pos + 1, num_pos_neg):
-        binary_label[i][1] = 1 # neg is at 1
-
-    return Human_augmented, Object_augmented, part_bbox, action_HO, action_PVP0, action_PVP1, action_PVP2, action_PVP3, action_PVP4, action_PVP5, num_pos, binary_label, gt_hp10, action_verb
-
-################################### for AVA #######################################
-
-def Get_Next_Instance_verb_AVA_for_only_PVP(Trainval_GT, Trainval_Neg, image_id, Pos_augment, Neg_select):
-
-    im_file = '/Disk1/AVA/input/train/' + str(Trainval_GT[image_id][0][0]) + '_0.jpg'
-    im       = cv2.imread(im_file)
-    im_orig  = im.astype(np.float32, copy=True)
-    im_orig -= config.cfg.PIXEL_MEANS
-    im_shape = im_orig.shape
-    im_orig  = im_orig.reshape(1, im_shape[0], im_shape[1], 3)
-
-    Human_augmented, Part_bbox, num_pos, gt_verb = Augmented_HO_AVA_for_only_verb(image_id, Trainval_GT, Trainval_Neg, Pos_augment, Neg_select)
-    
-    blobs = {}
-    blobs['image']       = im_orig
-    blobs['H_boxes']     = Human_augmented
-    blobs['P_boxes']     = Part_bbox
-    blobs['H_num']       = num_pos
-    blobs['gt_verb']     = gt_verb
-
-    return blobs
-
-def Augmented_HO_AVA_for_only_verb(image_id, trainval_GT, Trainval_Neg, Pos_augment, Neg_select):
-    pair_info = trainval_GT[image_id]
-    pair_num = len(pair_info)
-
-    # if not sufficient, repeat data
-    if pair_num >= Pos_augment:
-        List = random.sample(range(pair_num), Pos_augment)
-        GT = []
-        for i in range(Pos_augment):
-            GT.append(pair_info[List[i]])
-    else:
-        GT = pair_info
-        for i in range(Pos_augment - pair_num):
-            index = random.randint(0, pair_num - 1)
-            GT.append(pair_info[index])
-
-    Human_augmented = np.empty((0, 5), dtype=np.float64)
-    part_bbox   = np.empty((0, 10, 5), dtype=np.float64)
-    action_verb = np.empty((0, 80), dtype=np.float64)
-    # TODO:
-    for i in range(Pos_augment):
-        Human    = GT[i][1] # [x1, y1, x2, y2]
-        Human_augmented  = np.concatenate((Human_augmented, np.array([0, Human[0],  Human[1],  Human[2],  Human[3]]).reshape(1,5).astype(np.float64)), axis=0)
-        part_bbox        = np.concatenate((part_bbox, Generate_part_bbox(GT[i][5])), axis=0)
-        for k in range(len(GT[i][2])):
-            GT[i][2][k] -= 1
-        action_verb      = np.concatenate((action_verb, Generate_action_PVP(GT[i][2], 80)), axis=0)
-    num_pos = Pos_augment
-    
-    if image_id in Trainval_Neg.keys():
-        if len(Trainval_Neg[image_id]) < Neg_select:
-            List = range(len(Trainval_Neg[image_id]))
-        else:
-            List = random.sample(range(len(Trainval_Neg[image_id])), len(Trainval_Neg[image_id]))
-
-        for i in range(len(List)):
-            Neg = Trainval_Neg[image_id][List[i]]
-            Human_augmented  = np.concatenate((Human_augmented,  np.array([0, Neg[2][0], Neg[2][1], Neg[2][2], Neg[2][3]]).reshape(1,5)), axis=0)
-            try:
-                part_bbox = np.concatenate((part_bbox, Generate_part_bbox(Neg[8], Neg[2])), axis=0)
-            except:
-                print('id, List[i]', image_id, List[i])
-                print('Neg[8]', Neg[8])
-                print('Neg[9]', Neg[9])
-                print('Neg[10]', Neg[10])
-                print('Neg[11]', Neg[11])
-                raise ValueError
-            action_verb      = np.concatenate((action_verb, Generate_action_PVP(Neg[-2], 117)), axis=0)
-
-    num_pos_neg = len(Human_augmented)
-
-    Human_augmented   = Human_augmented.reshape(num_pos_neg, 5) 
-
-    return Human_augmented, part_bbox, num_pos, action_verb
-
