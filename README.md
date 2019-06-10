@@ -57,7 +57,7 @@ Please note that the results here is different from our paper [[Arxiv]](https://
 git clone https://github.com/DirtyHarryLYL/Transferable-Interactiveness-Network.git
 ```
 
-2.Download dataset and setup evaluation and API. (The detection result is collected from: iCAN: Instance-Centric Attention Network for Human-Object Interaction Detection [[website]](http://chengao.vision/iCAN/ ) )
+2.Download dataset and setup evaluation and API. (The detection result is collected from: iCAN: Instance-Centric Attention Network for Human-Object Interaction Detection [[website]](http://chengao.vision/iCAN/ ) , we only add pose estimation result to it.)
 
 ```
 chmod +x ./script/Dataset_download.sh 
