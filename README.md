@@ -6,6 +6,8 @@ Created by [Yong-Lu Li](https://dirtyharrylyl.github.io/), Siyuan Zhou, [Xijie H
 
 Link: [[Arxiv]](https://arxiv.org/abs/1811.08264)  [Website] [Poster]
 
+(This repo is still under construction, we would update the code and model this summer.)
+
 ## Citation
 If you find our work useful in your research, please consider citing:
 ```
@@ -57,7 +59,7 @@ Please note that the results here is different from our paper [[Arxiv]](https://
 git clone https://github.com/DirtyHarryLYL/Transferable-Interactiveness-Network.git
 ```
 
-2.Download dataset and setup evaluation and API. (The detection result is collected from: iCAN: Instance-Centric Attention Network for Human-Object Interaction Detection [[website]](http://chengao.vision/iCAN/ ) , we only add pose estimation result to it.)
+2.Download dataset and setup evaluation and API. (The detection result is collected from: iCAN: Instance-Centric Attention Network for Human-Object Interaction Detection [[website]](http://chengao.vision/iCAN/ ) )
 
 ```
 chmod +x ./script/Dataset_download.sh 
@@ -109,7 +111,7 @@ python tools/Test_TIN_VCOCO.py --num_iteration 6000 --model TIN_VCOCO
 
 Some of the codes are built upon iCAN: Instance-Centric Attention Network for Human-Object Interaction Detection [[website]](http://chengao.vision/iCAN/ ). We thank them for their work.  The pose estimation results are from [AlphaPose](https://github.com/MVIG-SJTU/AlphaPose) . **Alpha Pose** is an accurate multi-person pose estimator, which is the **first real-time** open-source system that achieves **70+ mAP (72.3 mAP)** on COCO dataset and **80+ mAP (82.1 mAP)** on MPII dataset.
 
-You can also follow our new work **HAKE**[[website]](http://hake-mvig.cn/home/), HAKE is a new large-scale knowledge base and engine for human activity understanding. HAKE supplies elaborate and abundant body part state labels for all the active human instances in all the images and frames.
+You can also follow our new work **HAKE **[[website]](http://hake-mvig.cn/home/), HAKE is a new large-scale knowledge base and engine for human activity understanding. HAKE supplies elaborate and abundant body part state labels for all the active human instances in all the images and frames.
 
 If you get any problems or if you find any bugs, don't hesitate to comment on GitHub or make a pull request! 
 
