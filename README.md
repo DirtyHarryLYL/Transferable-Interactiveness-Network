@@ -109,7 +109,7 @@ python tools/Test_TIN_VCOCO.py --num_iteration 6000 --model TIN_VCOCO
 
 ## Acknowledgement
 
-Some of the codes are built upon iCAN: Instance-Centric Attention Network for Human-Object Interaction Detection [[website]](http://chengao.vision/iCAN/ ). We thank them for their work.  The pose estimation results are from [AlphaPose](https://github.com/MVIG-SJTU/AlphaPose) . **Alpha Pose** is an accurate multi-person pose estimator, which is the **first real-time** open-source system that achieves **70+ mAP (72.3 mAP)** on COCO dataset and **80+ mAP (82.1 mAP)** on MPII dataset.
+Some of the codes are built upon iCAN: Instance-Centric Attention Network for Human-Object Interaction Detection [[website]](http://chengao.vision/iCAN/ ). We thank them for their work.  The pose estimation results are from [AlphaPose](https://github.com/MVIG-SJTU/AlphaPose) . **AlphaPose** is an accurate multi-person pose estimator, which is the **first real-time** open-source system that achieves **70+ mAP (72.3 mAP)** on COCO dataset and **80+ mAP (82.1 mAP)** on MPII dataset.
 
 You can also follow our new work **HAKE **[[website]](http://hake-mvig.cn/home/), HAKE is a new large-scale knowledge base and engine for human activity understanding. HAKE supplies elaborate and abundant body part state labels for all the active human instances in all the images and frames.
 
