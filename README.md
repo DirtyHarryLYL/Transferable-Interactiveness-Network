@@ -45,7 +45,7 @@ Interactiveness Knowledge indicates whether human and object interact with each 
 |RP<sub>T1</sub>C<sub>D</sub>| 48.3  |
 |RP<sub>T2</sub>C<sub>D</sub>| **49.0** |
 
-Please note that we have reimplemented and refined our code, thus the results here is slightly better than our paper [[Arxiv]](https://arxiv.org/abs/1811.08264).
+Please note that we have reimplemented and refined our code, thus the results here is better than our paper [[Arxiv]](https://arxiv.org/abs/1811.08264).
 
 ## Getting Started
 
