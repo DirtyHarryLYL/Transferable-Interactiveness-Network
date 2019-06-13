@@ -76,7 +76,7 @@ pip install -r requirements.txt
 4.Download our pre-trained weight (Optional)
 
 ```
-python script/Download_data.py 1f_w7HQxTfXGxOPrkriu7jTyCTC-KPEH3 weight/TIN_HICO.zip
+python script/Download_data.py 1f_w7HQxTfXGxOPrkriu7jTyCTC-KPEH3 Weights/TIN_HICO.zip
 python script/Download_data.py 1iU9dN9rLtekcHX2MT_zU_df3Yf0paL9s Weights/TIN_VCOCO.zip
 ```
 
