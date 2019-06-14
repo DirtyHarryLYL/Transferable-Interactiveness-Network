@@ -73,6 +73,8 @@ chmod +x ./script/Dataset_download.sh
 pip install -r requirements.txt
 ```
 
+If you have trouble installing requirements, try to update your pip or try to use conda/virtualenv.
+
 4.Download our pre-trained weight (Optional)
 
 ```
