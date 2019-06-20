@@ -80,3 +80,4 @@ python script/Download_data.py 1o59JGvhzI7CzdIVSxbcq0L6UnMLX0tDO Data/Trainval_G
 python script/Download_data.py 1qioujFz-jWBXPb-gCRqh6ttpf79H06Re Data/Trainval_Neg_HICO_with_pose.pkl
 python script/Download_data.py 1zEJqQcq2KF5QC8D2TIFAo0zog0PH2LF- Data/Trainval_Neg_VCOCO_with_pose.pkl
 python script/Download_data.py 1sjV6e916NIPcYYqbGwhKM6Vhl7SY6WqD -Results/80000_TIN_D_noS.pkl
+python script/Download_data.py 1sJipmoZ-5u0ymm8diqYd5Yqk2A-QQBXN -Results/60000_TIN_VCOCO_D.pkl
