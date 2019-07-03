@@ -28,24 +28,25 @@ Interactiveness Knowledge indicates whether human and object interact with each 
 
 |Method| Full(def) | Rare(def) | None-Rare(def)| Full(ko) | Rare(ko) | None-Rare(ko) |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-|RC<sub>D</sub>| 13.75 | 10.23 | 15.45 | 15.34| 10.98|17.02|
-|RP<sub>D</sub>C<sub>D</sub>| **17.03** | **13.42**| **18.11**| **19.17**| **15.51**|**20.26**|
-|RC<sub>T</sub>| 10.61  | 7.78 | 11.45 | 12.47 | 8.87|13.54|
-|RP<sub>T1</sub>C<sub>D</sub>| 16.91   | 13.32 | 17.99 | 19.05 | 15.22|20.19|
-|RP<sub>T2</sub>C<sub>D</sub>| 17.22   | 13.51 | 18.32 | 19.38 | 15.38|20.57|
+|RC<sub>D</sub>(paper)| 13.75 | 10.23 | 15.45 | 15.34| 10.98|17.02|
+|RP<sub>D</sub>C<sub>D</sub>(paper)| **17.03** | **13.42**| **18.11**| **19.17**| **15.51**|**20.26**|
+|RC<sub>T</sub>(paper)| 10.61  | 7.78 | 11.45 | 12.47 | 8.87|13.54|
+|RP<sub>T1</sub>C<sub>D</sub>(paper)| 16.91   | 13.32 | 17.99 | 19.05 | 15.22|20.19|
+|RP<sub>T2</sub>C<sub>D</sub>(paper)| 17.22   | 13.51 | 18.32 | 19.38 | 15.38|20.57|
 |RP<sub>T2</sub>C<sub>D</sub>(optimized)| **17.54**  | **13.80** | **18.65** | **19.75** | **15.70** |**20.96**|
 
 **Our Results on V-COCO dataset**
 
 |Method| Full(def) |
 |:---:|:---:|
-|RC<sub>D</sub>| 43.2|
-|RP<sub>D</sub>C<sub>D</sub>| **47.8** |
-|RC<sub>T</sub>| 38.5 |
-|RP<sub>T1</sub>C<sub>D</sub>| 48.3  |
-|RP<sub>T2</sub>C<sub>D</sub>| **49.0** |
+|RC<sub>D</sub>(paper)| 43.2|
+|RP<sub>D</sub>C<sub>D</sub>(paper)| **47.8** |
+|RC<sub>T</sub>(paper)| 38.5 |
+|RP<sub>T1</sub>C<sub>D</sub>(paper)| 48.3  |
+|RP<sub>T2</sub>C<sub>D</sub>(paper)| 48.7 |
+|RP<sub>T2</sub>C<sub>D</sub>(optimized)| **49.0** |
 
-**Please note that we have reimplemented and refined our code, thus the results here is better than our paper [[Arxiv]](https://arxiv.org/abs/1811.08264).**
+**Please note that we have reimplemented and refined the TIN, thus the results here are different and slightly better than the ones in paper [[Arxiv]](https://arxiv.org/abs/1811.08264).**
 
 ## [HAKE](http://hake-mvig.cn/home/)
 You may also be interested in our new work **HAKE**[[website]](http://hake-mvig.cn/home/), HAKE is a new large-scale knowledge base and engine for human activity understanding. HAKE provides elaborate and abundant **body part state** labels for active human instances in a large scale of images and videos. With HAKE, we boost the HOI recognition performance on HICO and some other widely-used human activity benchmarks. Now we are still enlarging and enriching it, and looking forward to working with outstanding researchers around the world on its applications and further improvements. If you have any pieces of advice or interests, please feel free to contact [Yong-Lu Li](https://dirtyharrylyl.github.io/) (yonglu_li@sjtu.edu.cn).
