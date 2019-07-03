@@ -167,13 +167,13 @@ class ResNet50(): # 64--128--256--512--512
         with slim.arg_scope(resnet_arg_scope(is_training=False)):
             net    = self.build_base()
             net, _ = resnet_v1.resnet_v1(net,
-                                         self.blocks[0:cfg.RESNET.FIXED_BLOCKS], # now 1, block 1
+                                         self.blocks[0:cfg.RESNET.FIXED_BLOCKS], 
                                          global_pool=False,
                                          include_root_block=False,
                                          scope=self.scope)
         with slim.arg_scope(resnet_arg_scope(is_training=is_training)):
             head, _ = resnet_v1.resnet_v1(net,
-                                          self.blocks[cfg.RESNET.FIXED_BLOCKS:-2], # now 1, block 2~3
+                                          self.blocks[cfg.RESNET.FIXED_BLOCKS:-2], 
                                           global_pool=False,
                                           include_root_block=False,
                                           scope=self.scope)
@@ -258,14 +258,14 @@ class ResNet50(): # 64--128--256--512--512
             # fc7_H + fc7_SH + sp---fc1024---fc8_binary_1
             fc_binary_1    = tf.concat([fc7_H, fc7_SH], 1) # [pos + neg, 3072]
             fc_binary_1    = tf.concat([fc_binary_1, sp, pool2_flat_pose_map], 1) # [pos + neg, 8480]
-            fc8_binary_1     = slim.fully_connected(fc_binary_1, 1024, scope = 'fc8_binary_1') # 1024? we should try
+            fc8_binary_1     = slim.fully_connected(fc_binary_1, 1024, scope = 'fc8_binary_1') 
             fc8_binary_1     = slim.dropout(fc8_binary_1, keep_prob = cfg.TRAIN_DROP_OUT_BINARY, is_training = is_training, scope = 'dropout8_binary_1') # [pos + neg,1024]
 
             # fc7_O + fc7_SO---fc1024---fc8_binary_2
             fc_binary_2    = tf.concat([fc7_O, fc7_SO], 1) # [pos, 3072]
             fc8_binary_2     = slim.fully_connected(fc_binary_2, 1024, scope = 'fc8_binary_2')
             fc8_binary_2     = slim.dropout(fc8_binary_2, keep_prob = cfg.TRAIN_DROP_OUT_BINARY, is_training = is_training, scope = 'dropout8_binary_2') # [pos,1024]
-            fc8_binary_2   = tf.concat([fc8_binary_2, fc8_binary_1[self.H_num:,:]], 0) # copt the neg part of fc8_binary_1 and concat
+            fc8_binary_2   = tf.concat([fc8_binary_2, fc8_binary_1[self.H_num:,:]], 0) 
 
             # fc8_binary_1 + fc8_binary_2---fc1024---fc9_binary
             fc8_binary     = tf.concat([fc8_binary_1, fc8_binary_2], 1)
