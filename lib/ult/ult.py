@@ -531,7 +531,7 @@ def Augmented_HO_Neg_pose_pattern_version2(GT, Trainval_Neg, shape, Pos_augment,
     binary_label = np.zeros((num_pos_neg, 2), dtype = 'int32')
     for i in range(num_pos):
         binary_label[i][0] = 1 # pos is at 0
-    for i in range(num_pos + 1, num_pos_neg):
+    for i in range(num_pos, num_pos_neg):
         binary_label[i][1] = 1 # neg is at 1
 
     return Pattern, Human_augmented, Human_augmented_solo, Object_augmented, action_HO, action_H, mask_HO, mask_H, binary_label
@@ -699,7 +699,7 @@ def Augmented_HO_spNeg_pose_pattern_version2(GT, Trainval_Neg, shape, Pos_augmen
     binary_label = np.zeros((num_pos_neg, 2), dtype = 'int32')
     for i in range(num_pos):
         binary_label[i][0] = 1 # pos is at 0
-    for i in range(num_pos + 1, num_pos_neg):
+    for i in range(num_pos, num_pos_neg):
         binary_label[i][1] = 1 # neg is at 1
 
     return Pattern, Human_augmented_sp, Human_augmented, Object_augmented, action_sp, action_HO, action_H, mask_sp, mask_HO, mask_H, binary_label
@@ -826,7 +826,7 @@ def Augmented_HO_Neg_HICO_pose_pattern_version2(GT, Trainval_Neg, shape, Pos_aug
     for i in range(num_pos):
         # if hoi_id belong to 80 then is 0 1, else 1 0
         binary_label[i][0] = 1 # pos is at 0 #############problem: here in pos, it contains the no interaction 80, so we may give this 80 '0 1' and 520 '1 0', and test
-    for i in range(num_pos + 1, num_pos_neg):
+    for i in range(num_pos, num_pos_neg):
         binary_label[i][1] = 1 # neg is at 1
 
     return Pattern, Human_augmented, Object_augmented, action_HO, num_pos, binary_label
