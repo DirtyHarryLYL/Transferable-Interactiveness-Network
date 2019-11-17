@@ -9,11 +9,12 @@ Link: [[Arxiv]](https://arxiv.org/abs/1811.08264)
 ## Citation
 If you find our work useful in your research, please consider citing:
 ```
- @article{li2018transferable,
- title={Transferable Interactiveness Prior for Human-Object Interaction Detection},
-  author={Li, Yong-Lu and Zhou, Siyuan and Huang, Xijie and Xu, Liang and Ma, Ze and Fang, Hao-Shu and Wang, Yan-Feng and Lu, Cewu},
-  journal={arXiv preprint arXiv:1811.08264},
-  year={2018}
+@inproceedings{li2019transferable,
+  title={Transferable Interactiveness Knowledge for Human-Object Interaction Detection},
+  author={Li, Yong-Lu and Zhou, Siyuan and Huang, Xijie and Xu, Liang and Ma, Ze and Fang, Hao-Shu and Wang, Yanfeng and Lu, Cewu},
+  booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
+  pages={3585--3594},
+  year={2019}
 }
 ```
 
