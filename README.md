@@ -1,7 +1,7 @@
 
 # TIN: Transferable Interactiveness Network   
 
-**News: Our paper "PaStaNet: Toward Human Activity Knowledge Engine" is accepted in CVPR2020, which contains the image-level and instance-level human part state annotations (HAKE) and the corresponding models. We will release them soon. Besides, we will also release the code and data of our two related papers "Detailed 2D-3D Joint Representation for Human-Object Interaction" and  "Symmetry in Attribute-Object Compositions" (also accepted in CVPR2020).**
+**News: Our paper "PaStaNet: Toward Human Activity Knowledge Engine" is accepted in CVPR2020, which contains the image-level and instance-level human part state annotations ([[HAKE]](https://github.com/DirtyHarryLYL/HAKE) and the corresponding models. We will release them soon. Besides, we will also release the code and data of our two related papers "Detailed 2D-3D Joint Representation for Human-Object Interaction" and  "Symmetry in Attribute-Object Compositions" (also accepted in CVPR2020).**
 
 Code for our **CVPR2019** paper *"Transferable Interactiveness Knowledge for Human-Object Interaction Detection"*.
 
