@@ -39,7 +39,7 @@ Interactiveness Knowledge indicates whether human and object interact with each 
 |RC<sub>T</sub>(paper)| 10.61  | 7.78 | 11.45 | 12.47 | 8.87|13.54|
 |RP<sub>T1</sub>C<sub>D</sub>(paper)| 16.91   | 13.32 | 17.99 | 19.05 | 15.22|20.19|
 |RP<sub>T2</sub>C<sub>D</sub>(paper)| 17.22   | 13.51 | 18.32 | 19.38 | 15.38|20.57|
-|RP<sub>T1</sub>C<sub>D</sub>(optimized)| **17.54**  | **13.80** | **18.65** | **19.75** | **15.70** |**20.96**|
+|Interactiveness-optimized| **17.54**  | **13.80** | **18.65** | **19.75** | **15.70** |**20.96**|
 
 **Our Results on V-COCO dataset**
 
@@ -50,7 +50,7 @@ Interactiveness Knowledge indicates whether human and object interact with each 
 |RC<sub>T</sub>(paper)| 38.5 |
 |RP<sub>T1</sub>C<sub>D</sub>(paper)| 48.3  |
 |RP<sub>T2</sub>C<sub>D</sub>(paper)| 48.7 |
-|RP<sub>T1</sub>C<sub>D</sub>(optimized)| **49.0** |
+|Interactiveness-optimized| **49.0** |
 
 **Please note that we have reimplemented TIN (e.g. replacing the vanilla HOI classifier with iCAN and using cosine_decay lr), thus the result here is different and slight better than the one in [[Arxiv]](https://arxiv.org/abs/1811.08264).**
 
