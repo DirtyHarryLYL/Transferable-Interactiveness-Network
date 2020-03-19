@@ -35,7 +35,7 @@ Interactiveness Knowledge indicates whether human and object interact with each 
 |Method| Full(def) | Rare(def) | None-Rare(def)| Full(ko) | Rare(ko) | None-Rare(ko) |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 |RC<sub>D</sub>(paper)| 13.75 | 10.23 | 15.45 | 15.34| 10.98|17.02|
-|RP<sub>D</sub>C<sub>D</sub>(paper)| **17.03** | **13.42**| **18.11**| **19.17**| **15.51**|**20.26**|
+|RP<sub>D</sub>C<sub>D</sub>(paper)| 17.03 | 13.42| 18.11| 19.17| 15.51|20.26|
 |RC<sub>T</sub>(paper)| 10.61  | 7.78 | 11.45 | 12.47 | 8.87|13.54|
 |RP<sub>T1</sub>C<sub>D</sub>(paper)| 16.91   | 13.32 | 17.99 | 19.05 | 15.22|20.19|
 |RP<sub>T2</sub>C<sub>D</sub>(paper)| 17.22   | 13.51 | 18.32 | 19.38 | 15.38|20.57|
@@ -46,7 +46,7 @@ Interactiveness Knowledge indicates whether human and object interact with each 
 |Method| Full(def) |
 |:---:|:---:|
 |RC<sub>D</sub>(paper)| 43.2|
-|RP<sub>D</sub>C<sub>D</sub>(paper)| **47.8** |
+|RP<sub>D</sub>C<sub>D</sub>(paper)| 47.8 |
 |RC<sub>T</sub>(paper)| 38.5 |
 |RP<sub>T1</sub>C<sub>D</sub>(paper)| 48.3  |
 |RP<sub>T2</sub>C<sub>D</sub>(paper)| 48.7 |
