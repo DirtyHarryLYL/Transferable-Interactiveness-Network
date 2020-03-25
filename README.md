@@ -1,7 +1,7 @@
 
 # TIN: Transferable Interactiveness Network   
 
-**News: We open a small repo: HOI learning study list (https://github.com/DirtyHarryLYL/HOI-Learning-List). It includes most of the recent HOI-related papers, code, datasets and leaderboard on widely-used benchmarks. Hope it could help everybody interested in HOI.**
+**News: We open a small repo: HOI learning list (https://github.com/DirtyHarryLYL/HOI-Learning-List). It includes most of the recent HOI-related papers, code, datasets and leaderboard on widely-used benchmarks. Hope it could help everybody interested in HOI.**
 
 **1) Our paper "PaStaNet: Toward Human Activity Knowledge Engine" is accepted in CVPR2020, which contains the image-level and instance-level human part state annotations and the corresponding models. We will release them soon. Besides, we will also release the code and data of our two related papers "Detailed 2D-3D Joint Representation for Human-Object Interaction" and  "Symmetry and Group in Attribute-Object Compositions" (also accepted in CVPR2020).**
 
