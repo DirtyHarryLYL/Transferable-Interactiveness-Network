@@ -11,7 +11,7 @@ Code for our **CVPR2019** paper *"Transferable Interactiveness Knowledge for Hum
 
 Created by [Yong-Lu Li](https://dirtyharrylyl.github.io/), Siyuan Zhou, [Xijie Huang](https://huangowen.github.io/), [Liang Xu](https://liangxuy.github.io/), Ze Ma, [Hao-Shu Fang](https://fang-haoshu.github.io/), Yan-Feng Wang, [Cewu Lu](http://mvig.sjtu.edu.cn).
 
-Link: [[Arxiv]](https://arxiv.org/abs/1811.08264)
+Link: [[arXiv]](https://arxiv.org/abs/1811.08264)
 
 ## Citation
 If you find our work useful in your research, please consider citing:
