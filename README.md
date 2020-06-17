@@ -117,6 +117,14 @@ python tools/Test_TIN_HICO.py --num_iteration 1700000 --model TIN_HICO
 python tools/Test_TIN_VCOCO.py --num_iteration 6000 --model TIN_VCOCO
 ```
 
+### Notes on training and Q&A
+
+Since the interactiveness branch is easier to converge, first pre-training the whole model with HOI classification loss only then finetuning with both HOI and interactiveness loss is preferred to get the best performance.
+
+Q: How is the used loss weights generated? 
+
+A: Please refer to this [issue](https://github.com/DirtyHarryLYL/Transferable-Interactiveness-Network/issues/36) for detailed explanation.
+
 ## Acknowledgement
 
 Some of the codes are built upon iCAN: Instance-Centric Attention Network for Human-Object Interaction Detection [[website]](http://chengao.vision/iCAN/ ). Thanks them for their great work! The pose estimation results are obtained from [AlphaPose](https://github.com/MVIG-SJTU/AlphaPose) . **Alpha Pose** is an accurate multi-person pose estimator, which is the **first real-time** open-source system that achieves **70+ mAP (72.3 mAP)** on COCO dataset and **80+ mAP (82.1 mAP)** on MPII dataset. You may also use your own pose estimation results to train the interactiveness predictor, thus you could directly donwload the train and test pkl files from iCAN [[website]](http://chengao.vision/iCAN/) and insert your pose results.
