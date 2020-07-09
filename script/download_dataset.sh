@@ -30,7 +30,7 @@ unzip annotations_trainval2014.zip
 rm train2014.zip
 rm val2014.zip
 rm test2014.zip
-rm annotations_trainval2014
+rm annotations_trainval2014.zip
 
 cd ../
 python script_pick_annotations.py coco/annotations
