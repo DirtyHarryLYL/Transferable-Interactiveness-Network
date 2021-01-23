@@ -72,7 +72,7 @@ RCD in new version: R (representation extractor), C (interaction classifier), D 
 |RCD| 17.84 |13.08 |18.78 |20.58 |16.19 |21.45|
 |RCD<sub>1|17.49|12.23|18.53|20.28|15.25|21.27|
 |RCD<sub>2|18.43|13.93|19.32|21.10|16.56|22.00|
-|RCD<sub>3|20.93|18.95|21.32|23.02|20.96|23.42|
+|RCD<sub>3|**20.93**|**18.95**|**21.32**|**23.02**|**20.96**|**23.42**|
 
 **V-COCO**
 |Method| Scenario-1 |
@@ -81,14 +81,14 @@ RCD in new version: R (representation extractor), C (interaction classifier), D 
 |RCD| 48.4|
 |RCD<sub>1|48.5|
 |RCD<sub>2|48.7|
-|RCD<sub>3|49.1|
+|RCD<sub>3|**49.1**|
 
 **PaStaNet-HOI**
 |Method| mAP |
 |:---:|:---:|
 |iCAN|11.0|
 |R+iCAN+D<sub>3|13.13|
-|RCD| 15.38|
+|RCD| **15.38**|
 
 ## Getting Started
 
