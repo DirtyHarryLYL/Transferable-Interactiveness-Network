@@ -1,7 +1,7 @@
 
 # TIN: Transferable Interactiveness Network   
 
-#### **News**: (2021.1.15) Our extended version of [TIN (Transferable Interactiveness Network)](https://github.com/DirtyHarryLYL/Transferable-Interactiveness-Network) is accepted by TPAMI! New paper and code will be released soon.
+#### **News**: (2021.1.15) Our extended version of TIN is accepted by **TPAMI**! New paper and code will be released soon.
 
 (2020.10.27) The code of [IDN](https://github.com/DirtyHarryLYL/HAKE-Action-Torch/tree/IDN-(Integrating-Decomposing-Network)) ([Paper](https://arxiv.org/abs/2010.16219)) in NeurIPS'20 is released!
 
@@ -9,11 +9,11 @@
 
 **We have opened a tiny repo: HOI learning list (https://github.com/DirtyHarryLYL/HOI-Learning-List). It includes most of the recent HOI-related papers, code, datasets and leaderboard on widely-used benchmarks. Hope it could help everybody interested in HOI.**
 
-Code for our **CVPR2019** paper *"Transferable Interactiveness Knowledge for Human-Object Interaction Detection"*.
+Code of *"Transferable Interactiveness Knowledge for Human-Object Interaction Detection"*.
 
 Created by [Yong-Lu Li](https://dirtyharrylyl.github.io/), Siyuan Zhou, [Xijie Huang](https://huangowen.github.io/), [Liang Xu](https://liangxuy.github.io/), Ze Ma, [Hao-Shu Fang](https://fang-haoshu.github.io/), Yan-Feng Wang, [Cewu Lu](http://mvig.sjtu.edu.cn).
 
-Link: [[arXiv]](https://arxiv.org/abs/1811.08264)
+Link: [[CVPR arXiv]](https://arxiv.org/abs/1811.08264), [[TPAMI arXiv]]()
 
 ## Citation
 If you find our work useful in your research, please consider citing:
@@ -38,7 +38,7 @@ Interactiveness Knowledge indicates whether human and object interact with each 
 
 ![Overview of Our Framework](https://github.com/DirtyHarryLYL/Transferable-Interactiveness-Network/blob/master/images/overview.jpg?raw=true)
 
-## Results on HICO-DET and V-COCO
+## Results on HICO-DET and V-COCO (CVPR)
 
 **Our Results on HICO-DET dataset**
 
