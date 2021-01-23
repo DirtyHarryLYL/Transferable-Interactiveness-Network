@@ -59,13 +59,36 @@ Interactiveness Knowledge indicates whether human and object interact with each 
 **Please note that we have reimplemented TIN (e.g. replacing the vanilla HOI classifier with iCAN and using cosine_decay lr), thus the result here is different and slight better than the one in [[Arxiv]](https://arxiv.org/abs/1811.08264).**
 
 ## Extended Version (TAPMI 2021)
-Besides the instance-level interactiveness between humans and objects, we further propose the **part-level** interactiveness between body parts and objects. More details please refer to our paper [arXiv (Coming soon)]().
+![Part Interactiveness Attention](https://github.com/DirtyHarryLYL/Transferable-Interactiveness-Network/blob/master/images/tin-pami.PNG?raw=true)
+Besides the instance-level interactiveness between humans and objects, we further propose the **part-level** interactiveness between body parts and objects (whether a body part is interacted with an object or not). A new large-scale HOI benchmark based on the data from [HAKE (CVPR2020)](http://hake-mvig.cn), i.e., **PaStaNet-HOI** is also constructed. It contains **110K+ images with 520 HOIs** (without the 80 "no_interaction" HOIs of HICO-DET to avoid the imcomplete labeling) and is more difficult than HICO-DET. We hope it can help to benchmark the HOI detection method better. More details please refer to our paper [arXiv (Coming soon)]().
 
 ### New results of TPAMI version
-Coming soon.
+RCD in new version: R (representation extractor), C (interaction classifier), D (interactiveness discriminator), slightly different from the CVPR 2019 version.
 
-## [HAKE](http://hake-mvig.cn/home/)
-You may also be interested in our new work **HAKE**[[website]](http://hake-mvig.cn/home/), HAKE is a new large-scale knowledge base and engine for human activity understanding. HAKE provides elaborate and abundant **body part state** labels for active human instances in a large scale of images and videos. With HAKE, we boost the HOI recognition performance on HICO and some other widely-used human activity benchmarks. Now we are still enlarging and enriching it, and looking forward to working with outstanding researchers around the world on its applications and further improvements. If you have any pieces of advice or interests, please feel free to contact [Yong-Lu Li](https://dirtyharrylyl.github.io/) (yonglu_li@sjtu.edu.cn).
+**HICO-DET**
+|Method| Full(def) | Rare(def) | None-Rare(def)| Full(ko) | Rare(ko) | None-Rare(ko) |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+|R+iCAN+D<sub>3|17.58 |13.75|18.33|19.13|15.06|19.94|
+|RCD| 17.84 |13.08 |18.78 |20.58 |16.19 |21.45|
+|RCD<sub>1|17.49|12.23|18.53|20.28|15.25|21.27|
+|RCD<sub>2|18.43|13.93|19.32|21.10|16.56|22.00|
+|RCD<sub>3|20.93|18.95|21.32|23.02|20.96|23.42|
+
+**V-COCO**
+|Method| Scenario-1 |
+|:---:|:---:|
+|R+iCAN+D<sub>3|45.8 (46.1)|
+|RCD| 48.4|
+|RCD<sub>1|48.5|
+|RCD<sub>2|48.7|
+|RCD<sub>3|49.1|
+
+**PaStaNet-HOI**
+|Method| mAP |
+|:---:|:---:|
+|iCAN|11.0|
+|R+iCAN+D<sub>3|13.13|
+|RCD| 15.38|
 
 ## Getting Started
 
@@ -134,6 +157,9 @@ Since the interactiveness branch is easier to converge, first pre-training the w
 Q: How is the used loss weights generated? 
 
 A: Please refer to this [issue](https://github.com/DirtyHarryLYL/Transferable-Interactiveness-Network/issues/36) for detailed explanation.
+
+## [HAKE](http://hake-mvig.cn/home/)
+You may also be interested in our new work **HAKE**[[website]](http://hake-mvig.cn/home/), HAKE is a new large-scale knowledge base and engine for human activity understanding. HAKE provides elaborate and abundant **body part state** labels for active human instances in a large scale of images and videos. With HAKE, we boost the HOI recognition performance on HICO and some other widely-used human activity benchmarks. Now we are still enlarging and enriching it, and looking forward to working with outstanding researchers around the world on its applications and further improvements. If you have any pieces of advice or interests, please feel free to contact [Yong-Lu Li](https://dirtyharrylyl.github.io/) (yonglu_li@sjtu.edu.cn).
 
 ## Acknowledgement
 
