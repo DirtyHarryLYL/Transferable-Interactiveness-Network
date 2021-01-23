@@ -58,6 +58,12 @@ Interactiveness Knowledge indicates whether human and object interact with each 
 
 **Please note that we have reimplemented TIN (e.g. replacing the vanilla HOI classifier with iCAN and using cosine_decay lr), thus the result here is different and slight better than the one in [[Arxiv]](https://arxiv.org/abs/1811.08264).**
 
+## Extended Version (TAPMI 2021)
+Besides the instance-level interactiveness between humans and objects, we further propose the **part-level** interactiveness between body parts and objects. More details please refer to our paper [arXiv (Coming soon)]().
+
+### New results of TPAMI version
+Coming soon.
+
 ## [HAKE](http://hake-mvig.cn/home/)
 You may also be interested in our new work **HAKE**[[website]](http://hake-mvig.cn/home/), HAKE is a new large-scale knowledge base and engine for human activity understanding. HAKE provides elaborate and abundant **body part state** labels for active human instances in a large scale of images and videos. With HAKE, we boost the HOI recognition performance on HICO and some other widely-used human activity benchmarks. Now we are still enlarging and enriching it, and looking forward to working with outstanding researchers around the world on its applications and further improvements. If you have any pieces of advice or interests, please feel free to contact [Yong-Lu Li](https://dirtyharrylyl.github.io/) (yonglu_li@sjtu.edu.cn).
 
