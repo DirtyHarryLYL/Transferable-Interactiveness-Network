@@ -1,7 +1,7 @@
 
 # TIN: Transferable Interactiveness Network   
 
-#### **News**: (2021.1.15) Our extended version of TIN is accepted by **TPAMI**! New paper and code will be released soon.
+#### **News**: (2021.1.15) Our extended version of [TIN](https://arxiv.org/abs/2101.10292) is accepted by **TPAMI**!
 
 (2020.10.27) The code of [IDN](https://github.com/DirtyHarryLYL/HAKE-Action-Torch/tree/IDN-(Integrating-Decomposing-Network)) ([Paper](https://arxiv.org/abs/2010.16219)) in NeurIPS'20 is released!
 
@@ -13,7 +13,7 @@ Code of *"Transferable Interactiveness Knowledge for Human-Object Interaction De
 
 Created by [Yong-Lu Li](https://dirtyharrylyl.github.io/), Siyuan Zhou, [Xijie Huang](https://huangowen.github.io/), [Liang Xu](https://liangxuy.github.io/), Ze Ma, [Hao-Shu Fang](https://fang-haoshu.github.io/), Yan-Feng Wang, [Cewu Lu](http://mvig.sjtu.edu.cn).
 
-Link: [[CVPR arXiv]](https://arxiv.org/abs/1811.08264), [[TPAMI arXiv]]()
+Link: [[CVPR arXiv]](https://arxiv.org/abs/1811.08264), [[TPAMI arXiv]](https://arxiv.org/abs/2101.10292)
 
 ## Citation
 If you find our work useful in your research, please consider citing:
@@ -66,7 +66,7 @@ Interactiveness Knowledge indicates whether human and object interact with each 
 
 ## Extended Version (TAPMI 2021)
 ![Part Interactiveness Attention](https://github.com/DirtyHarryLYL/Transferable-Interactiveness-Network/blob/master/images/tin-pami.PNG?raw=true)
-Besides the instance-level interactiveness between humans and objects, we further propose the **part-level** interactiveness between body parts and objects (whether a body part is interacted with an object or not). A new large-scale HOI benchmark based on the data from [HAKE (CVPR2020)](http://hake-mvig.cn), i.e., **PaStaNet-HOI** is also constructed. It contains **110K+ images with 520 HOIs** (without the 80 "no_interaction" HOIs of HICO-DET to avoid the incomplete labeling) and is more difficult than HICO-DET. We hope it can help to benchmark the HOI detection method better. More details please refer to our paper [arXiv (Coming soon)]().
+Besides the instance-level interactiveness between humans and objects, we further propose the **part-level** interactiveness between body parts and objects (whether a body part is interacted with an object or not). A new large-scale HOI benchmark based on the data from [HAKE (CVPR2020)](http://hake-mvig.cn), i.e., **PaStaNet-HOI** is also constructed. It contains **110K+ images with 520 HOIs** (without the 80 "no_interaction" HOIs of HICO-DET to avoid the incomplete labeling) and is more difficult than HICO-DET. We hope it can help to benchmark the HOI detection method better. More details please refer to our paper [arXiv](https://arxiv.org/abs/2101.10292).
 
 ### New results of TPAMI version
 RCD in new version: R (representation extractor), C (interaction classifier), D (interactiveness discriminator), slightly different from the CVPR 2019 version.
