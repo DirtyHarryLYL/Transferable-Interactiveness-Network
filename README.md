@@ -1,7 +1,12 @@
 
 # TIN: Transferable Interactiveness Network   
 
-#### **News**: (2021.1.15) Our extended version of [TIN](https://arxiv.org/abs/2101.10292) is accepted by **TPAMI**!
+#### **News**: (2021.2.7) Upgraded [HAKE-Activity2Vec](https://github.com/DirtyHarryLYL/HAKE-Action-Torch/tree/Activity2Vec) is released! Images/Videos --> human box + ID + skeleton + part states + action + representation. An offical demo is coming soon.
+<p align='center'>
+    <img src="https://github.com/DirtyHarryLYL/HAKE-Action-Torch/blob/Activity2Vec/demo/a2v-demo.gif", height="400">
+</p>
+
+(2021.1.15) Our extended version of [TIN](https://arxiv.org/abs/2101.10292) is accepted by **TPAMI**!
 
 (2020.10.27) The code of [IDN](https://github.com/DirtyHarryLYL/HAKE-Action-Torch/tree/IDN-(Integrating-Decomposing-Network)) ([Paper](https://arxiv.org/abs/2010.16219)) in NeurIPS'20 is released!
 
