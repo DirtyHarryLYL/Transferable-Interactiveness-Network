@@ -6,6 +6,8 @@
     <img src="https://github.com/DirtyHarryLYL/HAKE-Action-Torch/blob/Activity2Vec/demo/a2v-demo.gif", height="400">
 </p>
 
+## Full demo: [[YouTube]](https://t.co/hXiAYPXEuL?amp=1)
+
 (2021.1.15) Our extended version of [TIN](https://arxiv.org/abs/2101.10292) is accepted by **TPAMI**!
 
 (2020.10.27) The code of [IDN](https://github.com/DirtyHarryLYL/HAKE-Action-Torch/tree/IDN-(Integrating-Decomposing-Network)) ([Paper](https://arxiv.org/abs/2010.16219)) in NeurIPS'20 is released!
