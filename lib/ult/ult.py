@@ -275,43 +275,6 @@ def bb_IOU(boxA, boxB):
     overlaps = inters / uni
     return overlaps
 
-# def Augmented_box(bbox, shape, image_id, augment = 15, break_flag = True):
-
-#     thres_ = 0.7
-
-#     box = np.array([0, bbox[0],  bbox[1],  bbox[2],  bbox[3]]).reshape(1,5)
-#     box = box.astype(np.float64)
-        
-#     count = 0
-#     time_count = 0
-#     while count < augment:
-        
-#         time_count += 1
-#         height = bbox[3] - bbox[1]
-#         width  = bbox[2] - bbox[0]
-
-#         height_cen = (bbox[3] + bbox[1]) / 2
-#         width_cen  = (bbox[2] + bbox[0]) / 2
-
-#         ratio = 1 + randint(-10,10) * 0.01
-
-#         height_shift = randint(-np.floor(height),np.floor(height)) * 0.1
-#         width_shift  = randint(-np.floor(width),np.floor(width)) * 0.1
-
-#         H_0 = max(0, width_cen + width_shift - ratio * width / 2)
-#         H_2 = min(shape[1] - 1, width_cen + width_shift + ratio * width / 2)
-#         H_1 = max(0, height_cen + height_shift - ratio * height / 2)
-#         H_3 = min(shape[0] - 1, height_cen + height_shift + ratio * height / 2)
-        
-        
-#         if bb_IOU(bbox, np.array([H_0, H_1, H_2, H_3])) > thres_:
-#             box_ = np.array([0, H_0, H_1, H_2, H_3]).reshape(1,5)
-#             box  = np.concatenate((box,     box_),     axis=0)
-#             count += 1
-#         if break_flag == True and time_count > 150:
-#             return box
-            
-#     return box
 
 def Augmented_box(bbox, shape, image_id, augment=15, break_flag=True, mode=True):
     # mode = True for instance human box and object box
@@ -417,32 +380,6 @@ def get_skeleton(human_box, human_pose, human_pattern, num_joints = 17, size = 6
     joints[num_joints] = (joints[5] + joints[6]) / 2
 
     return draw_relation(human_pattern, joints)
-
-
-# def Get_next_sp_with_pose(human_box, object_box, human_pose, num_joints=17):
-    
-#     InteractionPattern = [min(human_box[0], object_box[0]), min(human_box[1], object_box[1]), max(human_box[2], object_box[2]), max(human_box[3], object_box[3])]
-#     height = InteractionPattern[3] - InteractionPattern[1] + 1
-#     width = InteractionPattern[2] - InteractionPattern[0] + 1
-#     if height > width:
-#         H, O = bbox_trans(human_box, object_box, 'height')
-#     else:
-#         H, O  = bbox_trans(human_box, object_box, 'width')
-
-#     Pattern = np.zeros((64,64,2), dtype='float32')
-#     Pattern[int(H[1]):int(H[3]) + 1,int(H[0]):int(H[2]) + 1,0] = 1
-#     Pattern[int(O[1]):int(O[3]) + 1,int(O[0]):int(O[2]) + 1,1] = 1
-
-#     if human_pose != None and len(human_pose) == 51:
-#         skeleton = get_skeleton(human_box, human_pose, H, num_joints)
-#     else:
-#         skeleton = np.zeros((64,64,1), dtype='float32')
-#         skeleton[int(H[1]):int(H[3]) + 1,int(H[0]):int(H[2]) + 1,0] = 0.05
-
-#     Pattern = np.concatenate((Pattern, skeleton), axis=2)
-
-#     return Pattern
-
 
 def Get_next_sp_with_pose(human_box, object_box, human_pose, num_joints=17):
     InteractionPattern = [min(human_box[0], object_box[0]), min(human_box[1], object_box[1]),
