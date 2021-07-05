@@ -151,6 +151,12 @@ python tools/Train_TIN_HICO.py --num_iteration 2000000 --model TIN_HICO_test
 python tools/Train_TIN_VCOCO.py --num_iteration 20000 --model TIN_VCOCO_test
 ```
 
+3.Train Interactiveness (TPAMI version)
+
+```
+python tools/Train_TIN_binary.py --num_iteration 100000 --model TIN_binary
+```
+
 ### Testing
 
 1.Test on HICO-DET dataset
@@ -163,6 +169,12 @@ python tools/Test_TIN_HICO.py --num_iteration 1700000 --model TIN_HICO
 
 ```
 python tools/Test_TIN_VCOCO.py --num_iteration 6000 --model TIN_VCOCO
+```
+
+3.Test Interactiveness (TPAMI version)
+
+```
+python tools/Test_TIN_binary.py --num_iteration 80000 --model TIN_binary
 ```
 
 ### Notes on training and Q&A
