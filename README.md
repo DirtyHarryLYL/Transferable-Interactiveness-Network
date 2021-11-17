@@ -177,6 +177,34 @@ python tools/Test_TIN_VCOCO.py --num_iteration 6000 --model TIN_VCOCO
 python tools/Test_TIN_binary.py --num_iteration 80000 --model TIN_binary
 ```
 
+### Evaluation
+
+1.Download test result files and put them into the appropriate folder
+
+```
+Transferable-Interactiveness-Network
+ |─ -Results
+ │   |- HICO-DET_50000_TIN_10w_with_part.pkl
+ |   |- HICO-DET_1700000_TIN_HICO.pkl
+ |
+ :       :
+
+```
+
+2.Get Interactiveness mAP
+
+```
+python eval/eval_HICO_DET_binary.py
+```
+
+3.Get HOI mAP
+
+```
+python eval/eval_HICO_DET.py
+```
+
+
+
 ### Notes on training and Q&A
 
 Since the interactiveness branch is easier to converge, first pre-training the whole model with HOI classification loss only then finetuning with both HOI and interactiveness loss is preferred to get the best performance.
