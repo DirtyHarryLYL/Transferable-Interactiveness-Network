@@ -179,7 +179,7 @@ python tools/Test_TIN_binary.py --num_iteration 80000 --model TIN_binary
 
 ### Evaluation
 
-1.Download test result files and put them into the appropriate folder
+1.Download test result [files](https://drive.google.com/drive/folders/1xAt6f28qoQs-T71xELRCY9o3uLoqljzo?usp=sharing) and put them into the appropriate folder
 
 ```
 Transferable-Interactiveness-Network
