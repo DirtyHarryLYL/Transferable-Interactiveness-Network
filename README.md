@@ -36,11 +36,11 @@ If you find our work useful in your research, please consider citing:
   pages={3585--3594},
   year={2019}
 }
-@article{li2019transferable,
+@article{li2022transferable,
   title={Transferable Interactiveness Knowledge for Human-Object Interaction Detection},
   author={Li, Yong-Lu and Liu, Xinpeng and Wu, Xiaoqian and Huang, Xijie and Xu, Liang and Lu, Cewu},
   journal={TPAMI},
-  year={2021}
+  year={2022}
 }
 ```
 
