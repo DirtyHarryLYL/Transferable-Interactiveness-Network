@@ -186,6 +186,9 @@ Q: How is the used loss weights generated?
 A: Please refer to this [issue](https://github.com/DirtyHarryLYL/Transferable-Interactiveness-Network/issues/36) for detailed explanation.
 
 ## [HAKE](http://hake-mvig.cn/home/)
+<p align='center'>
+    <img src="https://github.com/DirtyHarryLYL/HAKE-Action-Torch/blob/Activity2Vec/demo/hake_history.jpg", height="300">
+</p>
 You may also be interested in our new work **HAKE**[[website]](http://hake-mvig.cn/home/), HAKE is a new large-scale knowledge base and engine for human activity understanding. HAKE provides elaborate and abundant **body part state** labels for active human instances in a large scale of images and videos. With HAKE, we boost the HOI recognition performance on HICO and some other widely-used human activity benchmarks. Now we are still enlarging and enriching it, and looking forward to working with outstanding researchers around the world on its applications and further improvements. If you have any pieces of advice or interests, please feel free to contact [Yong-Lu Li](https://dirtyharrylyl.github.io/) (yonglu_li@sjtu.edu.cn).
 
 ## Acknowledgement
