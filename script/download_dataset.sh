@@ -67,19 +67,68 @@ cp HICO-DET_Benchmark/data/hico_20160224_det/anno.mat Data/ho-rcnn/data/hico_201
 mkdir -Results/
 
 echo "Downloading training data..."
-python script/Download_data.py 1z5iZWJsMl4hafo0u7f1mVj7A2S5HQBOD Data/action_index.json
-python script/Download_data.py 1QeCGE_0fuQsFa5IxIOUKoRFakOA87JqY Data/prior_mask.pkl
-python script/Download_data.py 1JRMaE35EbJYxkXNSADEgTtvAFDdU20Ru Data/Test_Faster_RCNN_R-50-PFN_2x_HICO_DET.pkl
-python script/Download_data.py 1Y9yRTntfThrKMJbqyMzVasua25GUucf4 Data/Test_Faster_RCNN_R-50-PFN_2x_VCOCO.pkl
-python script/Download_data.py 1le4aziSn_96cN3dIPCYyNsBXJVDD8-CZ Data/Trainval_GT_HICO.pkl
-python script/Download_data.py 1YrsQUcBEF31cvqgCZYmX5j-ns2tgYXw7 Data/Trainval_GT_VCOCO.pkl
-python script/Download_data.py 1PPPya4M2poWB_QCoAheStEYn3rPMKIgR Data/Trainval_Neg_HICO.pkl
-python script/Download_data.py 1oGZfyhvArB2WHppgGVBXeYjPvgRk95N9 Data/Trainval_Neg_VCOCO.pkl
-python script/Download_data.py 12-ZFl2_AwRkVpRe5sqOJRJrGzBeXtWLm Data/Test_Faster_RCNN_R-50-PFN_2x_HICO_DET_with_pose.pkl
-python script/Download_data.py 1y3cnbX12jwNAoSiXDLcdzn-nF_jvsaum Data/Test_Faster_RCNN_R-50-PFN_2x_VCOCO_with_pose.pkl
-python script/Download_data.py 1IGxFW2Fe8uFRSoDtg5k_7dOxR7lK6SIA Data/Trainval_GT_HICO_with_pose.pkl
-python script/Download_data.py 1o59JGvhzI7CzdIVSxbcq0L6UnMLX0tDO Data/Trainval_GT_VCOCO_with_pose.pkl
-python script/Download_data.py 1qioujFz-jWBXPb-gCRqh6ttpf79H06Re Data/Trainval_Neg_HICO_with_pose.pkl
-python script/Download_data.py 1zEJqQcq2KF5QC8D2TIFAo0zog0PH2LF- Data/Trainval_Neg_VCOCO_with_pose.pkl
-python script/Download_data.py 1sjV6e916NIPcYYqbGwhKM6Vhl7SY6WqD -Results/80000_TIN_D_noS.pkl
-python script/Download_data.py 1sJipmoZ-5u0ymm8diqYd5Yqk2A-QQBXN -Results/60000_TIN_VCOCO_D.pkl
+# python script/Download_data.py 1z5iZWJsMl4hafo0u7f1mVj7A2S5HQBOD Data/action_index.json
+# python script/Download_data.py 1QeCGE_0fuQsFa5IxIOUKoRFakOA87JqY Data/prior_mask.pkl
+# python script/Download_data.py 1JRMaE35EbJYxkXNSADEgTtvAFDdU20Ru Data/Test_Faster_RCNN_R-50-PFN_2x_HICO_DET.pkl
+# python script/Download_data.py 1Y9yRTntfThrKMJbqyMzVasua25GUucf4 Data/Test_Faster_RCNN_R-50-PFN_2x_VCOCO.pkl
+# python script/Download_data.py 1le4aziSn_96cN3dIPCYyNsBXJVDD8-CZ Data/Trainval_GT_HICO.pkl
+# python script/Download_data.py 1YrsQUcBEF31cvqgCZYmX5j-ns2tgYXw7 Data/Trainval_GT_VCOCO.pkl
+# python script/Download_data.py 1PPPya4M2poWB_QCoAheStEYn3rPMKIgR Data/Trainval_Neg_HICO.pkl
+# python script/Download_data.py 1oGZfyhvArB2WHppgGVBXeYjPvgRk95N9 Data/Trainval_Neg_VCOCO.pkl
+# python script/Download_data.py 12-ZFl2_AwRkVpRe5sqOJRJrGzBeXtWLm Data/Test_Faster_RCNN_R-50-PFN_2x_HICO_DET_with_pose.pkl
+# python script/Download_data.py 1y3cnbX12jwNAoSiXDLcdzn-nF_jvsaum Data/Test_Faster_RCNN_R-50-PFN_2x_VCOCO_with_pose.pkl
+# python script/Download_data.py 1IGxFW2Fe8uFRSoDtg5k_7dOxR7lK6SIA Data/Trainval_GT_HICO_with_pose.pkl
+# python script/Download_data.py 1o59JGvhzI7CzdIVSxbcq0L6UnMLX0tDO Data/Trainval_GT_VCOCO_with_pose.pkl
+# python script/Download_data.py 1qioujFz-jWBXPb-gCRqh6ttpf79H06Re Data/Trainval_Neg_HICO_with_pose.pkl
+# python script/Download_data.py 1zEJqQcq2KF5QC8D2TIFAo0zog0PH2LF- Data/Trainval_Neg_VCOCO_with_pose.pkl
+# python script/Download_data.py 1sjV6e916NIPcYYqbGwhKM6Vhl7SY6WqD -Results/80000_TIN_D_noS.pkl
+# python script/Download_data.py 1sJipmoZ-5u0ymm8diqYd5Yqk2A-QQBXN -Results/60000_TIN_VCOCO_D.pkl
+
+# old links are unavailable, here are the new replaced ones (if the version of files is wrong as much time has passed, please notice us):
+# https://drive.google.com/file/d/12f2v5Jko5ESWO77KyhujTq4nD_6ilHCt/view?usp=share_link
+python script/Download_data.py 12f2v5Jko5ESWO77KyhujTq4nD_6ilHCt Data/action_index.json
+
+# https://drive.google.com/file/d/1IRooYkyaAAQNqO3Q6UzBoIW0QwbY8mB7/view?usp=share_link
+python script/Download_data.py 1IRooYkyaAAQNqO3Q6UzBoIW0QwbY8mB7 Data/prior_mask.pkl
+
+https://drive.google.com/file/d/1adsZcRYQiTJ6GR6f_0SAjrkZLVSDoxcP/view?usp=share_link
+python script/Download_data.py 1adsZcRYQiTJ6GR6f_0SAjrkZLVSDoxcP Data/Test_Faster_RCNN_R-50-PFN_2x_HICO_DET.pkl
+
+https://drive.google.com/file/d/18-1UhKBw-xaPuXD50chzTtswRIuNdNWp/view?usp=share_link
+python script/Download_data.py 18-1UhKBw-xaPuXD50chzTtswRIuNdNWp Data/Test_Faster_RCNN_R-50-PFN_2x_VCOCO.pkl
+
+https://drive.google.com/file/d/11HpFAWxLMVox_OXWoBfYH6Q0chnFTRSo/view?usp=share_link
+python script/Download_data.py 11HpFAWxLMVox_OXWoBfYH6Q0chnFTRSo Data/Trainval_GT_HICO.pkl
+
+https://drive.google.com/file/d/1RcLUL0biwcGjdx76U_2oElNpfIaSSxUd/view?usp=share_link
+python script/Download_data.py 1RcLUL0biwcGjdx76U_2oElNpfIaSSxUd Data/Trainval_GT_VCOCO.pkl
+
+https://drive.google.com/file/d/1FDquAd_Z6AOwMfiuPAKOFfb1_FPbK8TC/view?usp=share_link
+python script/Download_data.py 1FDquAd_Z6AOwMfiuPAKOFfb1_FPbK8TC Data/Trainval_Neg_HICO.pkl
+
+https://drive.google.com/file/d/1wweekvLEBl6E9zBDyPVczRLoHIOq6aGR/view?usp=share_link
+python script/Download_data.py 1wweekvLEBl6E9zBDyPVczRLoHIOq6aGR Data/Trainval_Neg_VCOCO.pkl
+
+https://drive.google.com/file/d/11FJ55o_GNwYFAJLgQO25btZ5RPqi8thh/view?usp=share_link
+python script/Download_data.py 11FJ55o_GNwYFAJLgQO25btZ5RPqi8thh Data/Test_Faster_RCNN_R-50-PFN_2x_HICO_DET_with_pose.pkl
+
+https://drive.google.com/file/d/1rf73-jIQFyI9WbmLzLzmQoap-EU3cXxe/view?usp=share_link
+python script/Download_data.py 1rf73-jIQFyI9WbmLzLzmQoap-EU3cXxe Data/Test_Faster_RCNN_R-50-PFN_2x_VCOCO_with_pose.pkl
+
+https://drive.google.com/file/d/1VZVUHdeCZ0d-LbpXNwbiNE-aJjOGD5An/view?usp=share_link
+python script/Download_data.py 1VZVUHdeCZ0d-LbpXNwbiNE-aJjOGD5An Data/Trainval_GT_HICO_with_pose.pkl
+
+https://drive.google.com/file/d/1cPZpU-L56EFHdsaE9U413_nsmpQOBW1d/view?usp=share_link
+python script/Download_data.py 1cPZpU-L56EFHdsaE9U413_nsmpQOBW1d Data/Trainval_GT_VCOCO_with_pose.pkl
+
+https://drive.google.com/file/d/15t5sNImWhvoA8aBied8hAcTSxE3fssgz/view?usp=share_link
+python script/Download_data.py 15t5sNImWhvoA8aBied8hAcTSxE3fssgz Data/Trainval_Neg_HICO_with_pose.pkl
+
+https://drive.google.com/file/d/1-MsytpBSSXkWBZ0eFp6w_G2IrPLXWy3o/view?usp=share_link
+python script/Download_data.py 1-MsytpBSSXkWBZ0eFp6w_G2IrPLXWy3o Data/Trainval_Neg_VCOCO_with_pose.pkl
+
+https://drive.google.com/file/d/1kQu3480HghtEdov5WaKdKDD8QhOlBzAm/view?usp=share_link
+python script/Download_data.py 1kQu3480HghtEdov5WaKdKDD8QhOlBzAm -Results/80000_TIN_D_noS.pkl
+
+https://drive.google.com/file/d/1uQG0n2cCi-JF_KLDujjn4Dg6E6vXb4p_/view?usp=share_link
+python script/Download_data.py 1uQG0n2cCi-JF_KLDujjn4Dg6E6vXb4p_ -Results/60000_TIN_VCOCO_D.pkl
