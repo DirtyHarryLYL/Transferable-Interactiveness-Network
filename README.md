@@ -145,8 +145,12 @@ If you have trouble installing requirements, try to update your pip or try to us
 4.Download our pre-trained weight (Optional)
 
 ```
-python script/Download_data.py 1f_w7HQxTfXGxOPrkriu7jTyCTC-KPEH3 Weights/TIN_HICO.zip
-python script/Download_data.py 1iU9dN9rLtekcHX2MT_zU_df3Yf0paL9s Weights/TIN_VCOCO.zip
+<!-- old links-->
+<!-- python script/Download_data.py 1f_w7HQxTfXGxOPrkriu7jTyCTC-KPEH3 Weights/TIN_HICO.zip
+python script/Download_data.py 1iU9dN9rLtekcHX2MT_zU_df3Yf0paL9s Weights/TIN_VCOCO.zip -->
+<!-- new links-->
+python script/Download_data.py 1AJIyLETjcHF4oxjZKk1KtXteAqHdK-De Weights/TIN_HICO.zip
+python script/Download_data.py 13559njUIizkqd9Yu8CtWAqX2ZPRSIp7R Weights/TIN_VCOCO.zip
 ```
 
 ### Training
